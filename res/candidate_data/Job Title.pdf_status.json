@@ -1,0 +1,147 @@
+{
+  "candidate_id": "Job Title.pdf",
+  "current_status": "finalized",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T16:05:34.242582",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T20:24:35.815578",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T23:25:34.250816",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:51:40.042129",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T21:15:32.086174",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "interviewed",
+      "timestamp": "2026-03-09T21:18:11.099669",
+      "user": "system",
+      "note": "Interview completed successfully"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "rejected",
+      "timestamp": "2026-03-09T21:41:00.412404",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:05.096054",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    },
+    {
+      "from_status": "cleared",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T21:43:11.593454",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T21:43:18.458318",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-25T21:58:03.507144",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-25T21:58:13.249215",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-31T12:17:51.265628",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-31T12:18:13.119644",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-31T12:31:58.343402",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-31T12:32:03.978279",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-07-08T22:29:30.090157",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-07-08T22:29:55.129193",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-07-08T22:30:00.080296",
+      "user": "admin",
+      "note": ""
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-GCHRMI",
+  "recruiter_message": "offline commit invited",
+  "score": 54.82718211823426,
+  "experience_years": 0,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Job Title.pdf"
+}

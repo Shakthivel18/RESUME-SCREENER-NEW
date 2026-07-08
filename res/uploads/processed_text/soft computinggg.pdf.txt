@@ -1,0 +1,299 @@
+ 
+ 
+ 
+ 
+ 
+ 
+PROJECT TITLE: 
+ARCHITECTING AND BUILDING LLM-POWERED 
+GENERATIVE AI APPLICATIONS 
+ 
+COURSE TITLE: 
+CSI3006-SOFT COMPUTING TECHNOLOGIES 
+ 
+ 
+TEAM-07 
+S K. LEEPA SREE(23MIC0114) 
+MALLU HARIKA(23MID0063) 
+N.HEMAMALINI(23MID0067) 
+B.OVIYA(23MID0244) 
+ABSTRACT: 
+ 
+The huge number of publications in the few years has made it really hard to do 
+a good job of looking at the literature for many subjects. This is because it 
+takes a lot of time to find and look at all the articles for a study. Using 
+keywords to search is not very helpful either. This is because it does not tell the 
+user what the people doing the study were trying to find out. It also does not 
+say what methods they used to do their research and what areas they were 
+looking at. The literature, for disciplines is just too much to handle. Doing an 
+analysis is hard when you have to look at so many publications. The people 
+doing the study used methods and looked at different areas but you cannot tell 
+that from just using keywords. The goal of this proposed project is to develop a 
+tool that will enable scholars and researchers to conduct a thorough literature 
+evaluation through the use of semantic embeddings, which provides a more 
+accurate means of finding and understanding articles that relate to their 
+research area. 
+ 
+This thing uses ideas in big language models and Natural Language Processing 
+methods to give smart analysis of research papers that makes sense. It collects 
+research materials. Gets them ready by uploading documents before pulling out 
+the text. The text it collects is broken down into parts so it can handle a lot of 
+documents without losing the meaning of what the research papers are saying. 
+Research papers are looked at carefully by this method to understand what they 
+are, about. Each section of text is then represented in an electronic format as 
+semantic embedding, where the meaning is inferred rather than by the use of 
+keyword matching. 
+ 
+Using a method called semantic similarity search, we create an embedded query 
+from our user's details and find it in a document embedding database. We then 
+send any associated research data back to our large language model to generate 
+related, coherent responses and provide context through research discoveries, 
+comparative studies, etc., while minimizing the chances of producing false 
+results.
+INTRODUCTION: 
+ 
+ 
+Finding, reviewing, and summarizing academic literature has altered significantly 
+as a result of the rise of digital research archives. Researchers employ digital 
+technology to assess the literature, identify research gaps, and perform 
+comparative analyses as a result of the increasing number of publications 
+published in journals, conferences, and preprint platforms. Accurate, 
+dependable, and scalable automated systems for literature analysis are 
+desperately needed as the body of scholarly literature and multidisciplinary 
+research expands and changes. Given their impact on scholarly output and 
+research direction, it is imperative that the automated search recommendations 
+are reliable, factual, and contextually relevant. 
+ 
+Recent advances in artificial intelligence, especially with regard to massive 
+language models, present a chance to construct interactive systems that could 
+function as research assistants, gathering data from publications and responding 
+to inquiries about scholarly topics. In contrast to other formal academic 
+resources, probabilistic generation is used in less restricted models of big 
+language systems, which can result in inaccurate summary statements, 
+inaccurate information, and cyclical references. 
+ 
+[1]By using research documents, Retrieval-Augmented Generation (RAG) 
+approaches have been effective in reducing hallucinations and improving the 
+factual accuracy of LLM-generated responses. 
+ 
+[2] Several research studies have been carried out on the application in an effort 
+to expand on the significant efforts to improve the degree of relevance and 
+personalization. 
+ 
+[3] 
+Other research assess the reliability of theoretical systems based on LLM 
+and RAG using each of the post-generation evaluation methodologies. In 
+contrast to the architectural strategies utilized in response production control, 
+the techniques focus on evaluation. 
+ 
+[4] According to the research on knowledge-intensive document analysis, RAG-
+based systems are more accurate and faithful to the source than LLMs; 
+nonetheless, retrieval is not seen to be enough on its own to prevent 
+unsupported output. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+[5] Controlled generation techniques are essential in both scientific and decision 
+support systems since their goal is to produce condition response generation 
+while ensuring that there is enough data recovered that meet this requirement 
+and to have internal mechanisms available to allow for dependable output. 
+ 
+ 
+Based on this information, when writing a literature review it is required that the 
+review contain controlled generation techniques such as (i) how much RAG has 
+been able to add to grounding but has not done so at a level significant to 
+support over 50% of conditioned responses; and (ii) LLMs that operate alone 
+(stand alone) tend to be unreliable for providing determinations regarding 
+research papers. In response to these findings, I have completed the RPA 
+assistant (a paper analysis and literature review assistant that uses semantic 
+embedding) in accordance with the above stated requirements
+MOTIVATION: 
+A literature review usually takes a time. This is because many scientific articles 
+are being published every year. When you do research it can be really hard to 
+find the literature in journals that publish a lot of things. The problem is that 
+computers are not good at understanding what research studies really mean. 
+This is because the meaning of research is very complicated and you cannot 
+figure it out by looking at the words that are used in the study. A literature 
+review is still a job and it is hard to find the right literature. Computers are just 
+not able to understand the meaning of research studies, like a literature 
+review. However, by using semantic embeddings, researchers can compare 
+scientific studies using the meaning of the studies instead of comparing them 
+based only on the specific words used to create the study. LLM technology 
+allows researchers to summarize, compare, and evaluate the quality of 
+research articles, which will help them be more creative and efficient with their 
+time. 
+                
+CHALLENGES: 
+The size of papers is really big and they are getting more complicated. This 
+means that scientific papers are too long for Large Language Models. To make 
+embeddings for a lot of articles you need a lot of computer power and storage 
+space. It is very hard to find the parts of the paper and if the paper is not broken 
+up correctly you might lose the context that is necessary for understanding the 
+scientific papers. Scientific papers have a lot of information. This information is 
+critical, for understanding the scientific papers. As a result, if there is 
+missing/contextual information an LLM could produce a gibberish/no 
+reasonable summary of that document, thus rendering it useless for use within 
+educational settings. 
+PAPERS 
+PROS 
+CONS 
+[1] An LLM-Based System 
+for Accessible and 
+Personalized Scientific 
+Communication (Rehman et 
+al., 2025 
+Accessibility Enhancement, 
+Content Personalization, 
+Audience-Aware Scientific 
+Communication. 
+ 
+Small Sample Size, Limited 
+Experimental Validation, 
+Reduced Generalizability 
+[2] LLM-Enhanced Bilingual 
+Conversational Agent for 
+EFL Children (Xiao et al., 
+2025) 
+Pedagogical Effectiveness, 
+Bilingual Interaction, Child-
+Centered Language Learning 
+Age-Restricted 
+Design, 
+Limited Learner Scalability 
+[3] LLMs and Stack 
+Overflow Discussions (Da 
+Silva et al., 2025) 
+Empirical Evaluation, 
+Developer Community 
+Insights, LLM Impact Analysis 
+Platform Dependency, Stack 
+Overflow-Only Scope 
+[4] Large Language Models 
+Integration in Smart Grids 
+(Madani et al., 2025) 
+Cross-Domain Innovation, 
+Smart Grid Integration, 
+Intelligent Energy 
+Management 
+Cybersecurity Vulnerabilities, 
+System Security Risks 
+[5] Joint Bi-LSTM-GNN for 
+Source Code Retrieval (Bibi 
+et al., 2024) 
+Hybrid Deep Learning 
+Architecture, Sequential and 
+Structural Feature Learning, 
+Improved Code Retrieval 
+High Computational 
+Complexity, Increased 
+Training Time 
+[6] LangurTrace: Forensic 
+Analysis of Local LLM 
+Applications (Jeong et al., 
+2025) 
+Digital Forensic Support, 
+Local LLM Traceability, 
+Security Investigation Tool 
+Tool Dependency, Limited 
+Model Compatibility 
+[7] LLM-Based Digital 
+Assistant in Assembly 
+Manufacturing (Colabianchi 
+et al., 2024) 
+Real-World Industrial 
+Deployment, Manufacturing 
+Process Support, Practical 
+LLM Application 
+Domain Knowledge 
+Dependency, Knowledge 
+Base Quality Sensitivity 
+[8] Federated and Edge 
+Learning for LLMs (Piccialli 
+et al., 2025) 
+Privacy-Preserving Learning, 
+Federated Training 
+Framework, Edge-Based 
+Computation 
+System Coordination 
+Complexity, Resource-
+Constrained Edge Nodes 
+[9] LLM-Based Virtual 
+Patient Chatbot (Laverde et 
+al., 2025) 
+Medical Education Support, 
+Virtual Patient Simulation, 
+Clinical Skill Training 
+Risk of Inaccurate Responses, 
+Clinical Reliability Concerns 
+[10] Construction Law 
+Knowledge Repository for 
+LLMs (Zhou et al., 2025) 
+Domain-Specific Knowledge 
+Integration, Legal 
+Information Structuring, 
+Enhanced LLM Performance 
+Narrow Domain 
+Applicability, Jurisdictional 
+Limitations 
+ARCHITECTURE DIAGRAM: 
+ 
+ 
+ 
+LITERATURE SURVEY: 
+[1] Rehman, M., Petrillo, A., Awasare, K., “An LLM-Based System for Accessible 
+and Personalized Scientific Communication,” Procedia Computer Science, vol. 
+274, pp. 939–952 (or similar), Elsevier, 2025 
+Reference Link: https://doi.org/10.1016/j.procs.2025.12.092 
+[2] Xiao, F., Li, Z., Lin, J., Zou, X., Yang, D., Zou, W., & Xiong, J., “Leveraging an 
+LLM-enhanced bilingual conversational agent for EFL children’s dialogic 
+reading: Insights from children, parents, and educators,” Computers and 
+Education: Artificial Intelligence, vol. 9, p. 100484, Elsevier, 2025. 
+Reference Link: https://doi.org/10.1016/j.caeai.2025.100484 
+[3] Da Silva, L. M. P., Samhi, J., & Khomh, F., “LLMs and Stack Overflow 
+discussions: Reliability, impact, and challenges,” Journal of Systems and 
+Software, vol. 230, p. 112541, Elsevier, 2025. 
+Reference Link: https://doi.org/10.1016/j.jss.2025.112541 
+[4] Madani, S., Tavasoli, A., Khoshtarash Astaneh, Z., & Pineau, P.-O., “Large 
+Language Models Integration in Smart Grids,” Energy Reports, vol. 14, pp. 
+1562–1577, Elsevier, 2025. 
+ 
+ 
+Reference Link: https://doi.org/10.1016/j.egyr.2025.06.051 
+[5] Bibi, N., Maqbool, A., & Rana, T., “Enhancing source code retrieval with joint 
+Bi-LSTM-GNN architecture: A comparative study with ChatGPT-LLM,” Journal of 
+King Saud University - Computer and Information Sciences, vol. 36, p. 101865, 
+Elsevier/King Saud University, 2024. 
+Reference Link: https://doi.org/10.1016/j.jksuci.2023.101865 
+[6] Jeong, S., Lee, S., & Park, J., “LangurTrace: Forensic analysis of local LLM 
+applications,” Forensic Science International: Digital Investigation, vol. 54, 
+Article 301987, Elsevier, 2025. 
+Reference Link: https://doi.org/10.1016/j.fsidi.2025.301987 
+[7] Colabianchi, S., Costantino, F., & Sabetta, N., “Assessment of a large 
+language model based digital intelligent assistant in assembly manufacturing,” 
+Computers in Industry, vol. 162, Article 104129, Elsevier, 2024. 
+Reference Link: https://doi.org/10.1016/j.compind.2024.104129 
+[8] Piccialli, F., Chiaro, D., Qi, P., Bellandi, V., & Damiani, E., “Federated and edge 
+learning for large language models,” Information Fusion, vol. 117, Article 
+102840, Elsevier, 2025. 
+Reference Link: https://doi.org/10.1016/j.inffus.2024.102840 
+[9] Laverde, N., Grévisse, C., Jaramillo, S., & Manrique, R., “Integrating large 
+language model-based agents into a virtual patient chatbot for clinical 
+anamnesis training,” Computational and Structural Biotechnology Journal, vol. 
+27, pp. 2481–2491, Elsevier, 2025. 
+Reference Link: https://doi.org/10.1016/j.csbj.2025.05.025 
+[10] Zhou, S., Wang, H., Ng, S. T., Li, D., Xie, S., Chen, K., & Wang, W., “Building 
+a construction law knowledge repository to enhance general-purpose large 
+language model performance on domain question-answering: A Chinese case 
+study,” Engineering, Construction and Architectural Management, accepted 
+2025. 
+Reference Link: https://doi.org/10.1108/ECAM-06-2024-0701 
+ 
+ 
+ 
+ 

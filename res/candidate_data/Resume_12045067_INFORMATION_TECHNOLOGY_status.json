@@ -1,0 +1,41 @@
+{
+  "candidate_id": "Resume_12045067_INFORMATION_TECHNOLOGY",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "rejected",
+      "timestamp": "2026-03-09T17:27:56.307379",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "rejected",
+      "timestamp": "2026-03-09T17:28:36.034411",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "rejected",
+      "timestamp": "2026-03-09T17:28:38.023053",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "cleared",
+      "timestamp": "2026-07-08T22:29:42.753577",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-36NMS2",
+  "score": 32.60496174471585,
+  "experience_years": 0,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_12045067_INFORMATION_TECHNOLOGY"
+}

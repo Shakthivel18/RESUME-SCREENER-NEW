@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_24889109_INFORMATION_TECHNOLOGY",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T22:18:13.440546",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:30.779528",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-F53X06",
+  "score": 46.404639112499474,
+  "experience_years": 3,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_24889109_INFORMATION_TECHNOLOGY"
+}

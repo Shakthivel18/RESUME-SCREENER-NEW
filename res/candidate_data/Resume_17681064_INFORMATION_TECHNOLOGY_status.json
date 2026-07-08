@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_17681064_INFORMATION_TECHNOLOGY",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:56:49.953597",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:56.666208",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-L3Q1PO",
+  "score": 41.402929995796995,
+  "experience_years": 15,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_17681064_INFORMATION_TECHNOLOGY"
+}

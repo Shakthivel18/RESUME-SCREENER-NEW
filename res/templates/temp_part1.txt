@@ -1,0 +1,1311 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <!-- Version: 2.0.1 - Fixed Interview Blank Page Bug -->
+    <title>AI Resume Screener | NeuralHire</title>
+
+    <!-- React & ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <style>
+        .radar-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .proctor-alert {
+            animation: flash-red 2s infinite;
+        }
+
+        @keyframes flash-red {
+
+            0%,
+            100% {
+                box-shadow: inset 0 0 0 red;
+            }
+
+            50% {
+                box-shadow: inset 0 0 50px rgba(255, 50, 50, 0.5);
+            }
+        }
+
+        .mic-active {
+            animation: pulse-gold 1.5s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            900: '#0C2224', // Dark Moss
+                            800: '#153235', // Panel Moss
+                        },
+                        tropical: {
+                            300: '#5FFFD7', // Super Light Jade
+                            400: '#2EE6C8', // Bright Tropical Jade
+                            500: '#1BA890', // Deep Jade
+                        },
+                        gold: {
+                            300: '#F5D782', // Bright Gold
+                            400: '#EBC96E', // Golden Fern
+                            500: '#D4B056', // Deep Gold
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    animation: {
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'float-reverse': 'floatReverse 10s ease-in-out infinite',
+                        'spin-slow': 'spin 15s linear infinite',
+                        'bounce-slow': 'bounce 9s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        },
+                        floatReverse: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(20px) rotate(-5deg)' },
+                        },
+                        shine: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+
+    <!-- Fonts & Icons -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #EBC96E;
+            /* Golden Fern */
+            color: #0C2224;
+            /* Dark Moss */
+            overflow: hidden;
+        }
+
+        /* 
+           PATTERN 1: TECH CIRCUIT (For Gold Background)
+        */
+        .bg-tech-circuit {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 10 h80 v80 h-80 z' fill='none' stroke='%230C2224' stroke-width='0.5' opacity='0.2'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%230C2224' opacity='0.3'/%3E%3Cpath d='M10 10 l20 20 h20 v20' fill='none' stroke='%230C2224' stroke-width='1' opacity='0.3'/%3E%3Crect x='45' y='45' width='10' height='10' fill='none' stroke='%230C2224' stroke-width='1' transform='rotate(45 50 50)' opacity='0.2'/%3E%3C/svg%3E");
+        }
+
+        /* 
+           PATTERN 2: HEX LATTICE (For Dark Moss Panels) 
+           Distinct Honeycomb/Grid look
+        */
+        .bg-hex-lattice {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='70' viewBox='0 0 40 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232EE6C8' fill-opacity='0.08'%3E%3Cpath d='M0 40L20 52V28L0 40zm20 52l20-12V56L20 44v24V92zm20-12l20 12V68L40 80zM20 28L40 16 20 4 0 16z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Panel Styling */
+        .glass-panel {
+            background: linear-gradient(135deg, #0C2224, #153235);
+            /* Applying Hex Lattice via pseudo-element to control opacity/layering */
+            position: relative;
+            border: none;
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.7);
+            color: white;
+            z-index: 10;
+        }
+
+        /* Doodle Container */
+        .doodle-container {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .doodle-item {
+            position: absolute;
+            opacity: 0.15;
+            color: #0C2224;
+        }
+
+        /* Button Shine */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: skewX(-20deg) translateX(-150%);
+            transition: transform 0.5s;
+        }
+
+        .btn-shine:hover::after {
+            transform: skewX(-20deg) translateX(200%);
+            transition: transform 0.7s;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(46, 230, 200, 0.4);
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 1. Base GOLD Background -->
+    <div class="fixed inset-0 bg-gold-400 z-[-2]"></div>
+
+    <!-- 2. Tech Circuit Pattern on Gold -->
+    <div class="fixed inset-0 bg-tech-circuit z-[-1] opacity-60"></div>
+
+    <!-- 3. Floating Doodles/Objects -->
+    <div class="doodle-container">
+        <!-- Top Left Gear -->
+        <i class="fas fa-cog text-9xl doodle-item animate-spin-slow" style="top: -50px; left: -50px; opacity: 0.1;"></i>
+
+        <!-- Bottom Right Chip -->
+        <i class="fas fa-microchip text-[15rem] doodle-item animate-float"
+            style="bottom: -80px; right: -50px; opacity: 0.08;"></i>
+
+        <!-- Center Floating Cube -->
+        <i class="fas fa-cube text-8xl doodle-item animate-float-reverse"
+            style="top: 20%; right: 20%; opacity: 0.05;"></i>
+
+        <!-- Random Shapes -->
+        <div class="doodle-item border-4 border-forest-900 w-32 h-32 rounded-full animate-bounce-slow"
+            style="top: 60%; left: 10%; opacity: 0.05;"></div>
+        <div class="doodle-item border-4 border-forest-900 w-20 h-20 rotate-45 animate-float"
+            style="bottom: 30%; left: 40%; opacity: 0.05;"></div>
+
+        <!-- Binary Strings -->
+        <div class="doodle-item font-mono text-xl font-bold tracking-widest rotate-90"
+            style="top: 40%; left: 5%; opacity: 0.1;">101010101</div>
+        <div class="doodle-item font-mono text-xl font-bold tracking-widest -rotate-45"
+            style="bottom: 20%; right: 30%; opacity: 0.1;">00110011</div>
+    </div>
+
+    <div id="root" class="relative z-10"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
+        const { motion, AnimatePresence } = window.Motion;
+
+        // --- COMPONENTS ---
+
+        const Hero = ({ onComplete }) => {
+            const [launching, setLaunching] = useState(false);
+
+            const handleLaunch = () => {
+                setLaunching(true);
+                setTimeout(onComplete, 1200);
+            };
+
+            return (
+                <motion.div
+                    initial={{ opacity: 1 }}
+                    exit={{ opacity: 0, scale: 1.1, filter: 'blur(30px)' }}
+                    transition={{ duration: 1.0, ease: "easeInOut" }}
+                    className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
+                >
+                    <div className="absolute inset-0 bg-gold-400/95 backdrop-blur-xl z-[-1] transition-all duration-1000"></div>
+
+                    <AnimatePresence mode="wait">
+                        {!launching ? (
+                            <motion.div
+                                key="content"
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ scale: 1.5, opacity: 0, filter: 'blur(10px)' }}
+                                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                                className="text-center relative z-10"
+                            >
+                                <div className="w-56 h-56 mx-auto mb-10 relative">
+                                    <div className="absolute inset-0 rounded-full border-2 border-dashed border-forest-900/30 animate-spin-slow"></div>
+                                    <div className="absolute inset-4 rounded-full border border-forest-900/50 animate-reverse-spin"></div>
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <div className="w-40 h-40 rounded-full bg-forest-900 flex items-center justify-center shadow-[0_0_60px_rgba(46,230,200,0.6)] animate-float">
+                                            <i className="fas fa-brain text-7xl text-tropical-400"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <motion.h1
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.2 }}
+                                    className="text-8xl md:text-9xl font-black mb-4 tracking-tighter text-forest-900 drop-shadow-2xl"
+                                >
+                                    NEURAL<span className="text-white drop-shadow-md">HIRE</span>
+                                </motion.h1>
+                                <motion.p
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.4 }}
+                                    className="text-3xl text-forest-900/80 font-bold tracking-[0.3em] mb-16 uppercase"
+                                >
+                                    Algorithmic Talent Discovery
+                                </motion.p>
+
+                                <motion.button
+                                    initial={{ y: 20, opacity: 0 }}
+                                    animate={{ y: 0, opacity: 1 }}
+                                    transition={{ delay: 0.6 }}
+                                    onClick={handleLaunch}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="relative px-20 py-8 bg-forest-900 text-tropical-400 rounded-full font-black text-2xl shadow-[0_30px_60px_-10px_rgba(12,34,36,0.6)] group overflow-hidden"
+                                >
+                                    <span className="relative z-10 flex items-center gap-4 group-hover:gap-6 transition-all">
+                                        LAUNCH SYSTEM <i className="fas fa-rocket"></i>
+                                    </span>
+                                    <div className="absolute inset-0 bg-tropical-400 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                                </motion.button>
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="loader"
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 1.2 }}
+                                transition={{ duration: 0.5 }}
+                                className="flex flex-col items-center gap-8 z-10"
+                            >
+                                <div className="relative w-32 h-32">
+                                    <div className="absolute inset-0 border-4 border-t-forest-900 border-r-transparent border-b-forest-900 border-l-transparent rounded-full animate-spin"></div>
+                                    <div className="absolute inset-4 border-4 border-l-tropical-400 border-t-transparent border-r-tropical-400 border-b-transparent rounded-full animate-reverse-spin"></div>
+                                </div>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.3 }}
+                                    className="text-3xl font-black text-forest-900 uppercase tracking-widest"
+                                >
+                                    Initializing Core...
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            );
+        };
+
+        const LandingPage = ({ onSelectRole }) => {
+            return (
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.5 }}
+                    className="flex h-screen w-screen items-center justify-center gap-20 p-10"
+                >
+                    {/* Recruiter Card */}
+                    <div onClick={() => onSelectRole('login')} className="group w-96 h-[600px] glass-panel rounded-[2.5rem] p-10 flex flex-col items-center justify-center cursor-pointer hover:-translate-y-6 hover:shadow-[0_40px_80px_-10px_rgba(0,0,0,0.7)] transition-all duration-500 overflow-hidden text-center relative">
+                        {/* HEX PATTERN OVERLAY */}
+                        <div className="absolute inset-0 bg-hex-lattice opacity-30 pointer-events-none"></div>
+
+                        <div className="w-32 h-32 mb-10 flex items-center justify-center rounded-3xl bg-forest-900 border-2 border-tropical-400 shadow-[0_0_50px_rgba(46,230,200,0.3)] group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 relative z-10">
+                            <i className="fas fa-project-diagram text-6xl text-tropical-400 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <h3 className="text-4xl font-black text-white mb-4 tracking-tight relative z-10">RECRUITER</h3>
+                        <p className="text-center text-tropical-300/80 text-lg mb-12 leading-relaxed font-bold relative z-10">
+                            Architect Your Dream Team.<br />Precision AI Matching.
+                        </p>
+
+                        <div className="relative z-10 px-12 py-5 rounded-2xl bg-tropical-400 text-forest-900 font-black tracking-widest uppercase shadow-[0_10px_30px_rgba(46,230,200,0.4)] group-hover:bg-white group-hover:scale-105 transition-all">
+                            ENTER COMMAND HUB
+                        </div>
+                    </div>
+
+                    {/* Candidate Card */}
+                    <div onClick={() => onSelectRole('candidate')} className="group w-96 h-[600px] glass-panel rounded-[2.5rem] p-10 flex flex-col items-center justify-center cursor-pointer hover:-translate-y-6 hover:shadow-[0_40px_80px_-10px_rgba(0,0,0,0.7)] transition-all duration-500 overflow-hidden text-center relative">
+                        {/* HEX PATTERN OVERLAY */}
+                        <div className="absolute inset-0 bg-hex-lattice opacity-30 pointer-events-none"></div>
+
+                        <div className="w-32 h-32 mb-10 flex items-center justify-center rounded-3xl bg-forest-900 border-2 border-gold-300 shadow-[0_0_50px_rgba(235,201,110,0.3)] group-hover:scale-110 group-hover:-rotate-6 transition-all duration-300 relative z-10">
+                            <i className="fas fa-file-code text-6xl text-gold-300 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <h3 className="text-4xl font-black text-white mb-4 tracking-tight relative z-10">CANDIDATE</h3>
+                        <p className="text-center text-gold-300/80 text-lg mb-12 leading-relaxed font-bold relative z-10">
+                            Digitize Your Potential.<br />Join the Neural Grid.
+                        </p>
+
+                        <div className="relative z-10 px-12 py-5 rounded-2xl bg-gold-400 text-forest-900 font-black tracking-widest uppercase shadow-[0_10px_30px_rgba(235,201,110,0.4)] group-hover:bg-white group-hover:scale-105 transition-all">
+                            INITIATE TRANSMISSION
+                        </div>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const LoginPage = ({ onLogin, onBack }) => {
+            const [id, setId] = useState('');
+            const [pass, setPass] = useState('');
+            const [error, setError] = useState('');
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                if (id === 'admin' && pass === 'admin123') {
+                    onLogin();
+                } else {
+                    setError('Access Denied');
+                }
+            };
+
+            return (
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -50 }}
+                    className="flex h-screen w-screen items-center justify-center"
+                >
+                    <div className="glass-panel w-full max-w-lg p-14 rounded-[3rem] relative overflow-hidden shadow-2xl">
+                        {/* HEX PATTERN OVERLAY */}
+                        <div className="absolute inset-0 bg-hex-lattice opacity-30 pointer-events-none"></div>
+
+                        <div className="text-center mb-12 relative z-10">
+                            <i className="fas fa-fingerprint text-6xl text-tropical-400 mb-6 drop-shadow-lg"></i>
+                            <h2 className="text-4xl font-black text-white tracking-widest uppercase">Bio-Auth</h2>
+                        </div>
+
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-8 relative z-10">
+                            <div className="relative group">
+                                <input type="text" value={id} onChange={e => setId(e.target.value)} className="w-full bg-forest-900/80 rounded-2xl py-6 px-8 text-white font-bold text-xl outline-none border border-transparent focus:border-tropical-400/50 focus:shadow-[0_0_30px_rgba(46,230,200,0.2)] transition-all" placeholder="ID" />
+                            </div>
+                            <div className="relative group">
+                                <input type="password" value={pass} onChange={e => setPass(e.target.value)} className="w-full bg-forest-900/80 rounded-2xl py-6 px-8 text-white font-bold text-xl outline-none border border-transparent focus:border-tropical-400/50 focus:shadow-[0_0_30px_rgba(46,230,200,0.2)] transition-all" placeholder="Key" />
+                            </div>
+
+                            {error && <div className="text-red-300 text-sm font-black bg-red-900/80 py-4 rounded-2xl text-center border border-red-500/50">{error}</div>}
+
+                            <button type="submit" className="btn-shine py-6 bg-gradient-to-r from-tropical-500 to-tropical-400 text-forest-900 font-black rounded-2xl text-xl uppercase tracking-[0.2em] transform hover:scale-[1.02] shadow-[0_10px_40px_rgba(46,230,200,0.4)] transition-all">
+                                Verify
+                            </button>
+                        </form>
+
+                        <div className="text-center mt-12 relative z-10">
+                            <button onClick={onBack} className="text-sm font-bold text-white/30 hover:text-white transition-colors uppercase tracking-widest">Abort Sequence</button>
+                        </div>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const ResumeCard = ({ resume, rank, onClick, onInterview }) => {
+            const score = resume.score || (resume.similarity_score ? resume.similarity_score * 10 : 0);
+            const isHighMatch = score >= 75;
+
+            return (
+                <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: rank * 0.05 }}
+                    className="relative group bg-forest-900/90 hover:bg-forest-800 border border-white/10 hover:border-tropical-400/50 rounded-2xl p-5 cursor-pointer transition-all hover:scale-[1.01] hover:shadow-[0_10px_30px_rgba(12,34,36,0.5)] mb-3 flex items-center justify-between overflow-hidden backdrop-blur-md"
+                    onClick={() => onClick(resume)}
+                >
+                    {/* Darker Gradient Overlay for depth */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-forest-900/50 to-transparent pointer-events-none"></div>
+
+                    <div className="flex items-center gap-5 relative z-10 w-full">
+                        {/* Score Badge */}
+                        <div className={`w-16 h-16 rounded-xl flex flex-col items-center justify-center font-black shadow-lg border border-white/10 ${isHighMatch ? 'bg-tropical-400 text-forest-900' : 'bg-forest-950 text-white'}`}>
+                            <span className="text-xl sm:text-2xl leading-none">{typeof score === 'number' ? score.toFixed(1) : score}</span>
+                            <span className="text-[10px] uppercase opacity-70 mt-1">Score</span>
+                        </div>
+
+                        {/* Info */}
+                        <div className="flex-1 min-w-0">
+                            <h3 className="text-lg font-bold text-white mb-1 group-hover:text-tropical-300 transition-colors truncate">{resume.name || 'Candidate'}</h3>
+                            <div className="flex flex-wrap gap-2 text-xs font-bold uppercase tracking-wider items-center">
+                                <span className="text-tropical-400 bg-tropical-400/10 px-2 py-1 rounded-md border border-tropical-400/20">
+                                    {resume.experience_years || 0} Yrs Exp
+                                </span>
+                                {resume.jd_domain && (
+                                    <span className="text-gold-300 bg-gold-400/10 px-2 py-1 rounded-md border border-gold-400/20 truncate max-w-[150px]">
+                                        {resume.jd_domain}
+                                    </span>
+                                )}
+                                <span className="text-white/40 truncate">{resume.email}</span>
+                            </div>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex items-center gap-3 pl-4 border-l border-white/5">
+                            {/* Interview Button */}
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onInterview(resume); }}
+                                className="w-10 h-10 rounded-full bg-forest-950 border border-tropical-400/30 text-tropical-400 flex items-center justify-center hover:bg-tropical-400 hover:text-forest-900 transition-all shadow-lg hover:shadow-[0_0_15px_rgba(46,230,200,0.5)]"
+                                title="Start AI Interview"
+                            >
+                                <i className="fas fa-microphone-alt"></i>
+                            </button>
+
+                            <i className="fas fa-chevron-right text-white/20 group-hover:text-white transition-colors"></i>
+                        </div>
+                    </div>
+                </motion.div>
+            );
+        };
+
+        const DashboardChart = ({ type, data, options }) => {
+            const chartRef = useRef(null);
+            const chartInstance = useRef(null);
+
+            useEffect(() => {
+                // Safely access global Chart
+                const ChartConstructor = window.Chart;
+                if (!ChartConstructor) {
+                    console.error("Chart.js not loaded");
+                    return;
+                }
+
+                if (chartRef.current) {
+                    try {
+                        if (chartInstance.current) chartInstance.current.destroy();
+
+                        chartInstance.current = new ChartConstructor(chartRef.current, {
+                            type: type,
+                            data: data,
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    legend: { display: false },
+                                    title: { display: false }
+                                },
+                                scales: type !== 'doughnut' ? {
+                                    y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
+                                    x: { grid: { display: false } }
+                                } : {},
+                                ...options
+                            }
+                        });
+                    } catch (err) {
+                        console.error("Failed to render chart:", err);
+                    }
+                }
+                return () => { if (chartInstance.current) chartInstance.current.destroy(); };
+            }, [data, options, type]);
+
+            return <canvas ref={chartRef} style={{ width: '100%', height: '100%' }} />;
+        };
+
+        const RecruiterDashboard = ({ onLogout }) => {
+            const [jobDesc, setJobDesc] = useState('');
+            const [resumes, setResumes] = useState([]);
+            const [isAnalyzing, setIsAnalyzing] = useState(false);
+            const [selectedResume, setSelectedResume] = useState(null);
+            const [showDomainModal, setShowDomainModal] = useState(false);
+            const [domains, setDomains] = useState([]);
+            const [editingDomain, setEditingDomain] = useState(null);
+            const [domainForm, setDomainForm] = useState({ id: '', name: '', keywords: [], required_skills: [], nice_to_have: [] });
+            const [keywordInput, setKeywordInput] = useState('');
+            const [requiredInput, setRequiredInput] = useState('');
+            const [niceToHaveInput, setNiceToHaveInput] = useState('');
+
+            // Interview state
+            const [showInterviewModal, setShowInterviewModal] = useState(false);
+            const [interviewSession, setInterviewSession] = useState(null);
+            const [currentQuestion, setCurrentQuestion] = useState(0);
+            const [currentAnswer, setCurrentAnswer] = useState('');
+            const [isEvaluating, setIsEvaluating] = useState(false);
+
+            // Enterprise Upgrades
+            const [timeLeft, setTimeLeft] = useState(120);
+            const [isMicActive, setIsMicActive] = useState(false);
+            const [proctorWarnings, setProctorWarnings] = useState(0);
+            const [isTabActive, setIsTabActive] = useState(true);
+            const [showAnalytics, setShowAnalytics] = useState(false);
+            const [analyticsData, setAnalyticsData] = useState(null);
+
+            // Fetch analytics
+            useEffect(() => {
+                if (showAnalytics) {
+                    fetch('/api/analytics/stats')
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) setAnalyticsData(data);
+                        });
+                }
+            }, [showAnalytics]);
+
+            // Enterprise Hooks
+            useEffect(() => {
+                if (showInterviewModal && timeLeft > 0 && !isEvaluating) {
+                    const timer = setInterval(() => setTimeLeft(t => t - 1), 1000);
+                    return () => clearInterval(timer);
+                }
+            }, [timeLeft, showInterviewModal, isEvaluating]);
+
+            useEffect(() => {
+                const handleVisibility = () => {
+                    if (document.hidden && showInterviewModal) {
+                        setProctorWarnings(w => w + 1);
+                        alert("âš ï¸ PROCTOR WARNING: Tab switching detected. This event has been logged.");
+                    }
+                };
+                document.addEventListener('visibilitychange', handleVisibility);
+                return () => document.removeEventListener('visibilitychange', handleVisibility);
+            }, [showInterviewModal]);
+
+            // Voice Synthesis
+            const speakQuestion = (text) => {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.rate = 1.0;
+                utterance.pitch = 1.0;
+                window.speechSynthesis.speak(utterance);
+            };
+
+            // Voice Recognition - Enhanced with proper instance management
+            const recognitionRef = useRef(null);
+            const [interimTranscript, setInterimTranscript] = useState('');
+
+            const toggleMic = () => {
+                if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                    alert("Speech recognition not supported in this browser. Please use Chrome, Edge, or Safari.");
+                    return;
+                }
+
+                if (isMicActive) {
+                    // Stop recognition
+                    if (recognitionRef.current) {
+                        recognitionRef.current.stop();
+                        recognitionRef.current = null;
+                    }
+                    setIsMicActive(false);
+                    setInterimTranscript('');
+                } else {
+                    // Start recognition
+                    const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+                    const recognition = new SpeechRecognition();
+
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+                    recognition.lang = 'en-US';
+                    recognition.maxAlternatives = 1;
+
+                    recognition.onstart = () => {
+                        setIsMicActive(true);
+                        console.log('ðŸŽ¤ Voice recognition started');
+                    };
+
+                    recognition.onend = () => {
+                        setIsMicActive(false);
+                        setInterimTranscript('');
+                        console.log('ðŸŽ¤ Voice recognition ended');
+                    };
+
+                    recognition.onerror = (event) => {
+                        console.error('Speech recognition error:', event.error);
+
+                        if (event.error === 'no-speech') {
+                            // Auto-restart if no speech detected
+                            if (recognitionRef.current && isMicActive) {
+                                setTimeout(() => {
+                                    try { recognition.start(); } catch (e) { console.log(e); }
+                                }, 100);
+                            }
+                        } else if (event.error === 'network') {
+                            setIsMicActive(false);
+                            setInterimTranscript('');
+                            alert('Network error. Please check your internet connection.');
+                        } else if (event.error === 'not-allowed') {
+                            setIsMicActive(false);
+                            setInterimTranscript('');
+                            alert('Microphone access denied. Please allow microphone access in your browser settings.');
+                        } else {
+                            setIsMicActive(false);
+                            setInterimTranscript('');
+                        }
+                    };
+
+                    recognition.onresult = (event) => {
+                        let interimText = '';
+                        let finalText = '';
+
+                        for (let i = event.resultIndex; i < event.results.length; ++i) {
+                            const transcript = event.results[i][0].transcript;
+                            if (event.results[i].isFinal) {
+                                finalText += transcript + ' ';
+                            } else {
+                                interimText += transcript;
+                            }
+                        }
+
+                        // Update interim results for live feedback
+                        if (interimText) {
+                            setInterimTranscript(interimText);
+                        }
+
+                        // Add final results to answer
+                        if (finalText) {
+                            setCurrentAnswer(prev => {
+                                const newText = prev.trim() + ' ' + finalText.trim();
+                                return newText.trim();
+                            });
+                            setInterimTranscript('');
+                        }
+                    };
+
+                    recognitionRef.current = recognition;
+
+                    try {
+                        recognition.start();
+                    } catch (error) {
+                        console.error('Failed to start recognition:', error);
+                        alert('Failed to start voice recognition. Please try again.');
+                        setIsMicActive(false);
+                    }
+                }
+            };
+
+            // Cleanup recognition on unmount or when interview modal closes
+            useEffect(() => {
+                return () => {
+                    if (recognitionRef.current) {
+                        recognitionRef.current.stop();
+                        recognitionRef.current = null;
+                    }
+                };
+            }, []);
+
+            // Stop recognition when modal closes
+            useEffect(() => {
+                if (!showInterviewModal && recognitionRef.current) {
+                    recognitionRef.current.stop();
+                    recognitionRef.current = null;
+                    setIsMicActive(false);
+                    setInterimTranscript('');
+                }
+            }, [showInterviewModal]);
+
+            useEffect(() => {
+                loadDomains();
+            }, []);
+
+            const loadDomains = async () => {
+                try {
+                    const res = await fetch('/api/domains');
+                    const data = await res.json();
+                    if (data.success) setDomains(data.domains);
+                } catch (err) { console.error(err); }
+            };
+
+            const openCreateDomain = () => {
+                setEditingDomain(null);
+                setDomainForm({ id: '', name: '', keywords: [], required_skills: [], nice_to_have: [] });
+                setShowDomainModal(true);
+            };
+
+            const openEditDomain = async (domainId) => {
+                try {
+                    const res = await fetch(`/api/domains/${domainId}`);
+                    const data = await res.json();
+                    if (data.success) {
+                        setEditingDomain(domainId);
+                        setDomainForm({
+                            id: domainId,
+                            name: data.domain.name,
+                            keywords: data.domain.keywords || [],
+                            required_skills: data.domain.required_skills || [],
+                            nice_to_have: data.domain.nice_to_have || []
+                        });
+                        setShowDomainModal(true);
+                    }
+                } catch (err) { console.error(err); }
+            };
+
+            const saveDomain = async () => {
+                if (!domainForm.name || domainForm.keywords.length === 0) {
+                    alert('Please provide domain name and at least one keyword');
+                    return;
+                }
+
+                const url = editingDomain ? `/api/domains/${editingDomain}` : '/api/domains';
+                const method = editingDomain ? 'PUT' : 'POST';
+
+                try {
+                    const res = await fetch(url, {
+                        method,
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(domainForm)
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        setShowDomainModal(false);
+                        loadDomains();
+                    } else {
+                        alert(data.error || 'Failed to save domain');
+                    }
+                } catch (err) { alert('Error saving domain'); }
+            };
+
+            const deleteDomain = async (domainId) => {
+                if (!confirm('Delete this domain?')) return;
+                try {
+                    const res = await fetch(`/api/domains/${domainId}`, { method: 'DELETE' });
+                    const data = await res.json();
+                    if (data.success) loadDomains();
+                    else alert(data.error);
+                } catch (err) { alert('Error deleting domain'); }
+            };
+
+            const addTag = (field, value, setInput) => {
+                if (value.trim() && !domainForm[field].includes(value.toLowerCase().trim())) {
+                    setDomainForm({ ...domainForm, [field]: [...domainForm[field], value.toLowerCase().trim()] });
+                    setInput('');
+                }
+            };
+
+            const removeTag = (field, index) => {
+                setDomainForm({ ...domainForm, [field]: domainForm[field].filter((_, i) => i !== index) });
+            };
+
+            const selectDomain = async (domainId) => {
+                try {
+                    const res = await fetch(`/api/domains/${domainId}`);
+                    const data = await res.json();
+                    if (data.success && data.domain.template) {
+                        setJobDesc(data.domain.template);
+                    }
+                } catch (err) { console.error(err); }
+            };
+
+            const [isStartingInterview, setIsStartingInterview] = useState(false);
+
+            const startInterview = async (resume) => {
+                if (isStartingInterview) return;
+                setIsStartingInterview(true);
+
+                try {
+                    // Show immediate feedback to user
+                    const toast = document.createElement('div');
+                    toast.className = 'fixed top-5 right-5 bg-forest-900 text-white px-6 py-4 rounded-xl shadow-2xl z-[200] border border-gold-400/50 flex items-center gap-3 animate-bounce';
+                    toast.innerHTML = '<i class="fas fa-circle-notch fa-spin text-gold-400"></i><span class="font-bold">Generating Personalized Questions...</span>';
+                    document.body.appendChild(toast);
+
+                    const res = await fetch('/api/interview/start', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            candidate_id: resume.id,
+                            job_description: jobDesc,
+                            domain: resume.jd_domain || 'SOFTWARE_ENGINEERING'
+                        })
+                    });
+
+                    document.body.removeChild(toast);
+
+                    const data = await res.json();
+                    if (data.success) {
+                        setInterviewSession({ ...data.session, candidate_name: resume.name });
+                        setCurrentQuestion(0);
+                        setCurrentAnswer('');
+                        setShowInterviewModal(true);
+                    } else {
+                        alert('Could not start interview: ' + (data.error || 'Unknown error'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Failed to connect to AI service. Please check your connection.');
+                    const toast = document.querySelector('.fixed.top-5.right-5');
+                    if (toast) document.body.removeChild(toast);
+                } finally {
+                    setIsStartingInterview(false);
+                }
+            };
+
+            const submitAnswer = async () => {
+                if (!currentAnswer.trim()) {
+                    alert('Please provide an answer');
+                    return;
+                }
+
+                // Stop voice recognition if active
+                if (recognitionRef.current) {
+                    recognitionRef.current.stop();
+                    recognitionRef.current = null;
+                    setIsMicActive(false);
+                    setInterimTranscript('');
+                }
+
+                setIsEvaluating(true);
+
+                // Capture values before async operation to avoid closure issues
+                const totalQuestions = interviewSession.questions.length;
+                const currentQ = currentQuestion;
+
+                try {
+                    const question = interviewSession.questions[currentQuestion];
+
+                    const res = await fetch('/api/interview/answer', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            candidate_id: interviewSession.candidate_id,
+                            question: question.question,
+                            answer: currentAnswer,
+                            question_index: currentQuestion
+                        })
+                    });
+
+                    const data = await res.json();
+
+                    if (data.success) {
+                        const updatedAnswers = [...(interviewSession.answers || [])];
+                        // Ensure array is big enough
+                        while (updatedAnswers.length <= currentQuestion) updatedAnswers.push({});
+
+                        updatedAnswers[currentQuestion] = {
+                            question: question.question,
+                            answer: currentAnswer,
+                            evaluation: data.evaluation
+                        };
+
+                        // Update session state properly
+                        setInterviewSession(prev => ({
+                            ...prev,
+                            answers: updatedAnswers
+                        }));
+
+                        // Auto-advance logic with captured values to avoid closure issues
+                        setTimeout(() => {
+                            setIsEvaluating(false);
+                            if (currentQ < totalQuestions - 1) {
+                                setCurrentQuestion(currentQ + 1);
+                                setCurrentAnswer('');
+                            }
+                        }, 2500);
+                    } else {
+                        alert('Evaluation failed - ' + (data.error || 'Unknown error'));
+                        setIsEvaluating(false);
+                    }
+                } catch (err) {
+                    console.error('Submit answer error:', err);
+                    setIsEvaluating(false);
+                    alert('Network error submitting answer. Please try again.');
+                }
+            };
+
+            const completeInterview = async () => {
+                try {
+                    const res = await fetch('/api/interview/complete', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            candidate_id: interviewSession.candidate_id,
+                            session: interviewSession
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        alert(`Interview completed! Overall score: ${data.overall_score.toFixed(1)}/10`);
+                        setShowInterviewModal(false);
+                        setInterviewSession(null);
+                    }
+                } catch (err) { console.error(err); alert('Failed to save interview'); }
+            };
+
+            const runAnalysis = async () => {
+                if (!jobDesc.trim()) return;
+                setIsAnalyzing(true);
+                setResumes([]);
+                try {
+                    const res = await fetch('/api/match-resumes', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ job_description: jobDesc })
+                    });
+                    const data = await res.json();
+                    setResumes(data.matched_resumes || []);
+                } catch (err) { console.error(err); } finally { setIsAnalyzing(false); }
+            };
+
+            return (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex h-screen w-screen overflow-hidden">
+                    {/* LEFT PANEL with HEX PATTERN */}
+                    <div className="w-[45%] h-full p-12 flex flex-col bg-forest-900 shadow-[20px_0_50px_rgba(0,0,0,0.5)] relative z-20">
+                        {/* HEX PATTERN */}
+                        <div className="absolute inset-0 bg-hex-lattice opacity-40 pointer-events-none"></div>
+
+                        <div className="flex items-center justify-between mb-12 relative z-10">
+                            <div className="flex items-center gap-5">
+                                <div className="w-14 h-14 rounded-2xl bg-tropical-400 flex items-center justify-center shadow-[0_0_30px_rgba(46,230,200,0.6)]">
+                                    <i className="fas fa-cube text-forest-900 text-3xl"></i>
+                                </div>
+                                <div>
+                                    <h1 className="font-black text-3xl tracking-tighter text-white">NEURAL<span className="text-tropical-400">HIRE</span></h1>
+                                    <p className="text-xs text-tropical-300/70 font-bold tracking-[0.3em] uppercase">Operations Core</p>
+                                </div>
+                            </div>
+                            <div className="flex gap-2">
+
+                                <button onClick={openCreateDomain} className="w-12 h-12 rounded-full bg-tropical-400/20 hover:bg-tropical-400 text-tropical-400 hover:text-forest-900 flex items-center justify-center transition-all" title="Manage Domains">
+                                    <i className="fas fa-cog"></i>
+                                </button>
+                                <button onClick={onLogout} className="w-12 h-12 rounded-full bg-white/5 hover:bg-red-500/20 text-white/30 hover:text-red-400 flex items-center justify-center transition-all" title="Disconnect">
+                                    <i className="fas fa-sign-out-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        {/* Domain Pills */}
+                        <div className="mb-6 relative z-10">
+                            <label className="text-xs font-black text-tropical-400 uppercase tracking-widest flex items-center gap-2 mb-3">
+                                <i className="fas fa-layer-group"></i> Select Domain Template
+                            </label>
+                            <div className="flex flex-wrap gap-2 max-h-32 overflow-auto custom-scrollbar">
+                                {domains.map(domain => (
+                                    <div key={domain.id} onClick={() => selectDomain(domain.id)} className={`px-3 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all hover:scale-105 ${domain.is_custom ? 'bg-gold-400/20 text-gold-300 border border-gold-400/30 hover:bg-gold-400/30' : 'bg-tropical-400/20 text-tropical-300 border border-tropical-400/30 hover:bg-tropical-400/30'} flex items-center gap-2`}>
+                                        {domain.name}
+                                        {domain.is_custom && (
+                                            <button onClick={(e) => { e.stopPropagation(); openEditDomain(domain.id); }} className="hover:text-white">
+                                                <i className="fas fa-edit text-[10px]"></i>
+                                            </button>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Job Desc Input */}
+                        <div className="flex-grow flex flex-col gap-6 mb-8 relative z-10">
+                            <label className="text-sm font-black text-tropical-400 uppercase tracking-widest flex items-center gap-3">
+                                <i className="fas fa-sliders-h"></i> Configuration
+                            </label>
+                            <textarea value={jobDesc} onChange={(e) => setJobDesc(e.target.value)} className="w-full flex-grow bg-black/40 border-none rounded-3xl p-8 text-lg font-bold text-white focus:outline-none focus:ring-4 focus:ring-tropical-400/20 transition-all resize-none custom-scrollbar shadow-inner leading-relaxed backdrop-blur-sm" placeholder="Define Parameters..."></textarea>
+                        </div>
+
+                        <button onClick={runAnalysis} disabled={isAnalyzing} className="btn-shine w-full py-6 bg-tropical-400 hover:bg-white text-forest-900 rounded-3xl font-black text-xl shadow-[0_10px_40px_rgba(46,230,200,0.3)] transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-4 relative z-10">
+                            {isAnalyzing ? <><i className="fas fa-circle-notch fa-spin"></i> PROCESSING...</> : <><i className="fas fa-bolt"></i> RUN DIAGNOSTIC</>}
+                        </button>
+                    </div>
+
+                    {/* RIGHT PANEL: RESULTS OR ANALYTICS */}
+                    <div className="flex-1 h-full p-12 flex flex-col relative z-10 transition-all">
+                        {showAnalytics ? (
+                            /* ANALYTICS DASHBOARD */
+                            <div className="flex-col h-full animate-fade-in-up">
+                                <div className="flex justify-between items-end mb-10 pb-6 border-b-2 border-forest-900/10">
+                                    <div>
+                                        <h2 className="text-5xl font-black text-forest-900 mb-2 drop-shadow-sm">Analytics Vision</h2>
+                                        <div className="flex gap-4">
+                                            <span className="px-3 py-1 bg-gold-400/20 text-forest-900 font-bold rounded-lg text-xs uppercase border border-gold-400/30 flex items-center gap-2">
+                                                <i className="fas fa-search-dollar"></i> ROI Tracking
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="text-right">
+                                        <p className="text-forest-900/60 font-bold">Data Aggregation: COMPLETE</p>
+                                    </div>
+                                </div>
+
+                                {analyticsData ? (
+                                    <div className="flex-grow overflow-auto custom-scrollbar pr-4 space-y-8">
+                                        {/* KPI GRID */}
+                                        <div className="grid grid-cols-4 gap-6">
+                                            <div className="bg-white/40 p-6 rounded-3xl border border-white/50 shadow-lg">
+                                                <div className="text-forest-900/50 font-black uppercase text-xs tracking-widest mb-2">Total Candidates</div>
+                                                <div className="text-5xl font-black text-forest-900">{analyticsData.kpis.total_candidates}</div>
+                                            </div>
+                                            <div className="bg-white/40 p-6 rounded-3xl border border-white/50 shadow-lg">
+                                                <div className="text-forest-900/50 font-black uppercase text-xs tracking-widest mb-2">Interviews</div>
+                                                <div className="text-5xl font-black text-tropical-600">{analyticsData.kpis.interviews_conducted}</div>
+                                            </div>
+                                            <div className="bg-white/40 p-6 rounded-3xl border border-white/50 shadow-lg">
+                                                <div className="text-forest-900/50 font-black uppercase text-xs tracking-widest mb-2">Avg Tech Score</div>
+                                                <div className="text-5xl font-black text-gold-600">{analyticsData.kpis.avg_technical_score}</div>
+                                            </div>
+                                            <div className="bg-white/40 p-6 rounded-3xl border border-white/50 shadow-lg">
+                                                <div className="text-forest-900/50 font-black uppercase text-xs tracking-widest mb-2">Pass Rate</div>
+                                                <div className="text-5xl font-black text-purple-600">{analyticsData.kpis.pass_rate}%</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid grid-cols-2 gap-6 h-[500px]">
+                                            {/* DOMAIN BREAKDOWN CHART */}
+                                            <div className="bg-white/30 rounded-[2.5rem] p-8 border border-white/40 shadow-xl flex flex-col">
+                                                <h3 className="text-2xl font-black text-forest-900 mb-4">Domain Distribution</h3>
+                                                <div className="flex-grow relative">
+                                                    <DashboardChart
+                                                        type="doughnut"
+                                                        data={{
+                                                            labels: Object.keys(analyticsData.domain_distribution),
+                                                            datasets: [{
+                                                                data: Object.values(analyticsData.domain_distribution),
+                                                                backgroundColor: ['#2EE6C8', '#EBC96E', '#1D3B3E', '#FF6B6B', '#4ECDC4'],
+                                                                borderWidth: 0
+                                                            }]
+                                                        }}
+                                                        options={{
+                                                            cutout: '70%',
+                                                            plugins: { legend: { position: 'right', labels: { font: { family: 'Inter', weight: 'bold' } } } }
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            {/* SCORE DISTRIBUTION CHART */}
+                                            <div className="bg-forest-900 text-white p-8 rounded-[2.5rem] relative overflow-hidden flex flex-col">
+                                                <div className="absolute inset-0 bg-hex-lattice opacity-20 pointer-events-none"></div>
+                                                <h3 className="text-2xl font-black mb-4 relative z-10">Quality Funnel</h3>
+                                                <div className="flex-grow relative z-10">
+                                                    <DashboardChart
+                                                        type="bar"
+                                                        data={{
+                                                            labels: ['Low (<40%)', 'Medium (40-75%)', 'High (>75%)'],
+                                                            datasets: [{
+                                                                label: 'Candidates',
+                                                                data: analyticsData.score_distribution,
+                                                                backgroundColor: ['#FF6B6B', '#EBC96E', '#2EE6C8'],
+                                                                borderRadius: 10,
+                                                                barThickness: 40
+                                                            }]
+                                                        }}
+                                                        options={{
+                                                            scales: {
+                                                                y: { grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: 'rgba(255,255,255,0.7)' } },
+                                                                x: { grid: { display: false }, ticks: { color: 'white', font: { weight: 'bold' } } }
+                                                            }
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex-1 flex flex-col items-center justify-center">
+                                        <i className="fas fa-circle-notch fa-spin text-4xl text-forest-900/20"></i>
+                                        <div className="mt-4 text-tropical-400 font-bold uppercase tracking-widest text-sm">Aggregating Data...</div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            /* STANDARD GRID VIEW */
+                            <>
+                                <div className="flex justify-between items-end mb-10 pb-6 border-b-2 border-forest-900/10">
+                                    <div>
+                                        <h2 className="text-5xl font-black text-forest-900 mb-2 drop-shadow-sm">Command Center</h2>
+                                        <div className="flex gap-4">
+                                            <span className="px-3 py-1 bg-green-500/20 text-forest-900 font-bold rounded-lg text-xs uppercase border border-green-500/30 flex items-center gap-2">
+                                                <i className="fas fa-satellite-dish animate-pulse"></i> System Online
+                                            </span>
+                                            <span className="px-3 py-1 bg-blue-500/20 text-forest-900 font-bold rounded-lg text-xs uppercase border border-blue-500/30 flex items-center gap-2">
+                                                <i className="fas fa-shield-alt"></i> Secure Mode
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className="text-right flex gap-8">
+                                        <div>
+                                            <div className="text-4xl font-black text-forest-900">{resumes.length}</div>
+                                            <div className="text-xs text-forest-900/40 font-black uppercase tracking-widest">Candidates</div>
+                                        </div>
+                                        <div className="border-l border-forest-900/10 pl-8">
+                                            <div className="text-4xl font-black text-forest-900">{domains.length}</div>
+                                            <div className="text-xs text-forest-900/40 font-black uppercase tracking-widest">Active Domains</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex-grow overflow-auto custom-scrollbar pr-4 relative">
+                                    {resumes.length === 0 ? (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-forest-900/20">
+                                            <i className="fas fa-border-all text-9xl mb-8 animate-pulse"></i>
+                                            <p className="font-black text-2xl tracking-[0.5em] uppercase">Grid Empty</p>
+                                        </div>
+                                    ) : (
+                                        resumes.map((resume, idx) => <ResumeCard key={idx} resume={resume} rank={idx} onClick={setSelectedResume} onInterview={startInterview} />)
+                                    )}
+                                </div>
+                            </>
+                        )}
+                    </div>
+
+
+                    {/* Domain Management Modal */}
+                    {showDomainModal && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-forest-900/95 backdrop-blur-xl p-6" onClick={() => setShowDomainModal(false)}>
+                            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="bg-forest-900 w-full max-w-3xl max-h-[90vh] overflow-auto custom-scrollbar flex flex-col rounded-[3rem] shadow-[0_0_150px_rgba(46,230,200,0.2)] relative" onClick={e => e.stopPropagation()}>
+                                <div className="absolute inset-0 bg-hex-lattice opacity-20 pointer-events-none"></div>
+
+                                <div className="p-8 border-b border-white/5 bg-forest-800/50 backdrop-blur-md relative z-10 sticky top-0">
+                                    <h3 className="text-3xl font-black text-white">{editingDomain ? 'Edit Domain' : 'Create New Domain'}</h3>
+                                    <button onClick={() => setShowDomainModal(false)} className="absolute top-8 right-8 w-12 h-12 rounded-full bg-white/5 hover:bg-red-500 text-white/50 hover:text-white flex items-center justify-center transition-all">
+                                        <i className="fas fa-times"></i>
+                                    </button>
+                                </div>
+
+                                <div className="p-8 space-y-6 relative z-10">
+                                    <div>
+                                        <label className="text-sm font-bold text-tropical-400 uppercase tracking-wider mb-2 block">Domain ID *</label>
+                                        <input type="text" value={domainForm.id} onChange={e => setDomainForm({ ...domainForm, id: e.target.value.toUpperCase().replace(/\s+/g, '_') })} disabled={!!editingDomain} className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 px-6 text-white font-bold focus:outline-none focus:border-tropical-400/50 disabled:opacity-50" placeholder="e.g., BLOCKCHAIN_ENGINEERING" />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-bold text-tropical-400 uppercase tracking-wider mb-2 block">Domain Name *</label>
+                                        <input type="text" value={domainForm.name} onChange={e => setDomainForm({ ...domainForm, name: e.target.value })} className="w-full bg-black/40 border border-white/10 rounded-2xl py-4 px-6 text-white font-bold focus:outline-none focus:border-tropical-400/50" placeholder="e.g., Blockchain Engineering" />
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-bold text-tropical-400 uppercase tracking-wider mb-2 block">Keywords * (Press Enter to add)</label>
+                                        <div className="bg-black/40 border border-white/10 rounded-2xl p-4 min-h-[100px]">
+                                            <div className="flex flex-wrap gap-2 mb-2">
+                                                {domainForm.keywords.map((kw, i) => (
+                                                    <span key={i} className="px-3 py-1.5 bg-tropical-400/20 border border-tropical-400/30 rounded-full text-sm text-tropical-300 flex items-center gap-2">
+                                                        {kw}
+                                                        <button onClick={() => removeTag('keywords', i)} className="text-red-400 hover:text-red-300">Ã—</button>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <input type="text" value={keywordInput} onChange={e => setKeywordInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addTag('keywords', keywordInput, setKeywordInput))} className="w-full bg-transparent text-white outline-none" placeholder="Type and press Enter" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-bold text-gold-300 uppercase tracking-wider mb-2 block">Required Skills (Press Enter)</label>
+                                        <div className="bg-black/40 border border-white/10 rounded-2xl p-4 min-h-[80px]">
+                                            <div className="flex flex-wrap gap-2 mb-2">
+                                                {domainForm.required_skills.map((skill, i) => (
+                                                    <span key={i} className="px-3 py-1.5 bg-gold-400/20 border border-gold-400/30 rounded-full text-sm text-gold-300 flex items-center gap-2">
+                                                        {skill}
+                                                        <button onClick={() => removeTag('required_skills', i)} className="text-red-400 hover:text-red-300">Ã—</button>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <input type="text" value={requiredInput} onChange={e => setRequiredInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addTag('required_skills', requiredInput, setRequiredInput))} className="w-full bg-transparent text-white outline-none" placeholder="Type and press Enter" />
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label className="text-sm font-bold text-white/50 uppercase tracking-wider mb-2 block">Nice to Have (Press Enter)</label>
+                                        <div className="bg-black/40 border border-white/10 rounded-2xl p-4 min-h-[80px]">
+                                            <div className="flex flex-wrap gap-2 mb-2">
+                                                {domainForm.nice_to_have.map((skill, i) => (
+                                                    <span key={i} className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-full text-sm text-white/70 flex items-center gap-2">
+                                                        {skill}
+                                                        <button onClick={() => removeTag('nice_to_have', i)} className="text-red-400 hover:text-red-300">Ã—</button>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <input type="text" value={niceToHaveInput} onChange={e => setNiceToHaveInput(e.target.value)} onKeyDown={e => e.key === 'Enter' && (e.preventDefault(), addTag('nice_to_have', niceToHaveInput, setNiceToHaveInput))} className="w-full bg-transparent text-white outline-none" placeholder="Type and press Enter" />
+                                        </div>
+                                    </div>
+
+                                    <div className="flex gap-4 pt-4">
+                                        <button onClick={saveDomain} className="flex-1 py-4 bg-tropical-400 hover:bg-white text-forest-900 rounded-2xl font-black uppercase tracking-wider transition-all">
+                                            <i className="fas fa-save mr-2"></i> Save Domain
+                                        </button>
+                                        {editingDomain && (
+                                            <button onClick={() => deleteDomain(editingDomain)} className="px-6 py-4 bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white rounded-2xl font-black uppercase tracking-wider transition-all">
+                                                <i className="fas fa-trash"></i>
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+
+                    {/* AI Interview Modal */}
+                    {showInterviewModal && interviewSession && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="fixed inset-0 z-[100] flex items-center justify-center bg-forest-900/95 backdrop-blur-xl p-6" onClick={() => setShowInterviewModal(false)}>
+                            <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="bg-forest-900 w-full max-w-4xl max-h-[90vh] overflow-auto custom-scrollbar flex flex-col rounded-[3rem] shadow-[0_0_150px_rgba(255,184,0,0.3)] relative" onClick={e => e.stopPropagation()}>
+                                <div className="absolute inset-0 bg-hex-lattice opacity-20 pointer-events-none"></div>
+
+                                {/* Header with Enterprise Controls */}
+                                <div className="p-8 border-b border-white/5 bg-forest-800/50 backdrop-blur-md relative z-10 sticky top-0">
+                                    <div className="flex justify-between items-start mb-4">
+                                        <div>
+                                            <h3 className="text-3xl font-black text-white mb-2">AI Interview Process</h3>
+                                            <div className="flex gap-4 items-center">
+                                                <p className="text-gold-300 font-bold">{interviewSession.candidate_name}</p>
+                                                <span className={`text-xs px-2 py-1 rounded bg-red-900/50 text-red-400 font-mono border border-red-500/30 ${proctorWarnings > 0 ? 'opacity-100' : 'opacity-0'}`}>
+                                                    <i className="fas fa-exclamation-triangle mr-1"></i> FLAGS: {proctorWarnings}
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex gap-3">
+                                            {/* Timer */}
+                                            <div className={`px-4 py-2 rounded-xl font-mono text-xl font-bold border ${timeLeft < 30 ? 'bg-red-900/50 border-red-500 text-red-300 animate-pulse' : 'bg-black/40 border-gold-400/30 text-gold-300'}`}>
+                                                {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+                                            </div>
+
+                                            <button onClick={() => setShowInterviewModal(false)} className="w-12 h-12 rounded-full bg-white/5 hover:bg-red-500 text-white/50 hover:text-white flex items-center justify-center transition-all">
+                                                <i className="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    {/* Progress Bar */}
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <div className="flex-1 h-2 bg-white/10 rounded-full overflow-hidden">
+                                            <div className="h-full bg-gold-400 transition-all" style={{ width: `${((currentQuestion + 1) / interviewSession.questions.length) * 100}%` }}></div>
+                                        </div>
+                                        <span className="text-sm font-bold text-white/50">{currentQuestion + 1}/{interviewSession.questions.length}</span>
+                                    </div>
+                                </div>
+
+                                {/* Question Content */}
+                                <div className="p-8 space-y-6 relative z-10">
+                                    {interviewSession.questions[currentQuestion] && (

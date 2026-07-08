@@ -1,0 +1,83 @@
+{
+  "candidate_id": "Resume_12415691_DESIGNER",
+  "current_status": "finalized",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T15:57:13.686175",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T17:25:05.221258",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T22:50:12.275877",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:52.845619",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    },
+    {
+      "from_status": "cleared",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T22:27:26.676729",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T22:27:38.606504",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T22:27:47.763939",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T22:27:50.935847",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-10T12:29:04.169919",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-10T12:29:12.448118",
+      "user": "admin",
+      "note": ""
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-S9GUGM",
+  "score": 47.84823206708731,
+  "experience_years": 3,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_12415691_DESIGNER"
+}

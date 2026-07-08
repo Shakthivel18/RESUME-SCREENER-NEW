@@ -1,0 +1,49 @@
+{
+  "candidate_id": "Resume_27536013_INFORMATION_TECHNOLOGY",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:23:35.430944",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:56:49.959308",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T17:57:08.224950",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "interviewed",
+      "timestamp": "2026-03-09T20:35:49.803592",
+      "user": "system",
+      "note": "Interview completed successfully"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:08.815902",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-VI9T9A",
+  "recruiter_message": "",
+  "score": 45.036581231925155,
+  "experience_years": 10,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_27536013_INFORMATION_TECHNOLOGY"
+}

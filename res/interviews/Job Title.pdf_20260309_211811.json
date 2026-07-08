@@ -1,0 +1,125 @@
+{
+  "answers": [
+    {
+      "question": "Explain the difference between a process and a thread.",
+      "answer": "wehjtj",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What is the CAP theorem?",
+      "answer": "chky",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "Tell me about a challenging project you worked on.",
+      "answer": "cfghjkl;\n",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What are your strongest technical skills?",
+      "answer": "szxcojhuyfyu\n",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    }
+  ],
+  "candidate_id": "Job Title.pdf",
+  "current_question": 0,
+  "domain": "SOFTWARE_ENGINEERING",
+  "job_context": "We are looking for a skilled professional in the Software Engineering domain with strong technical expertise and problem-solving abilities.",
+  "questions": [
+    {
+      "category": "Technical",
+      "difficulty": "Medium",
+      "focus_area": "OS Concepts",
+      "question": "Explain the difference between a process and a thread."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Hard",
+      "focus_area": "System Design",
+      "question": "What is the CAP theorem?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "focus_area": "Experience",
+      "question": "Tell me about a challenging project you worked on."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Easy",
+      "focus_area": "Self-Assessment",
+      "question": "What are your strongest technical skills?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Management",
+      "question": "How do you handle tight deadlines?"
+    }
+  ],
+  "started_at": "2026-03-09T21:16:42.904565",
+  "status": "completed",
+  "candidate_name": "Job Title.pdf",
+  "completed_at": "2026-03-09T21:18:11.096933",
+  "overall_score": 1.0
+}
