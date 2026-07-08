@@ -1,0 +1,160 @@
+{
+  "answers": [
+    {
+      "question": "In a distributed microservices environment, you are implementing a Saga pattern to manage a multi-stage transaction across three services. If the second service fails due to a transient network error, but the third service has already received a 'ghost' event and partially processed it, how would you design your compensation logic to ensure eventual consistency without causing duplicate side effects?",
+      "answer": "xcvbnu\n",
+      "evaluation": {
+        "feedback": "I appreciate you submitting a response, but I cannot evaluate your technical knowledge based on the current input. To show your expertise, try explaining how you would use idempotency keys or the outbox pattern to manage these distributed states. I'd love to see a more detailed breakdown of your thought process.",
+        "improvements": [
+          "Provide a coherent technical explanation of Saga compensation logic",
+          "Explain how to handle idempotency to prevent duplicate side effects"
+        ],
+        "key_observations": [
+          "Input is gibberish/keyboard mashing",
+          "Zero technical terminology used",
+          "No attempt to address the complex distributed systems problem"
+        ],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 1,
+          "problem_solving": 1,
+          "technical_accuracy": 1
+        },
+        "red_flags": [
+          "Candidate provided a nonsensical answer which indicates a lack of effort or a technical error in submission"
+        ],
+        "score": 1,
+        "strengths": [
+          "None identified"
+        ]
+      }
+    },
+    {
+      "question": "You are troubleshooting a production service where CPU usage spikes to 100% every hour on the dot, causing significant latency for exactly 45 seconds. The service uses a garbage-collected language and handles high-volume WebSocket connections. Walk me through your methodology for isolating whether this is a Stop-the-World GC issue, a poorly optimized cron job, or a lock contention problem in the thread pool.",
+      "answer": "tjriy;",
+      "evaluation": {
+        "feedback": "It appears there may have been a technical error or an accidental submission, as the response provided does not contain a coherent answer. To improve, try walking through the specific tools you would use\u2014like a profiler for GC or a process monitor for cron jobs\u2014to diagnose the hourly spikes. I'm looking forward to seeing your actual troubleshooting process!",
+        "improvements": [
+          "Provide a structured response explaining how to check GC logs versus system crontabs",
+          "Address the specific time-based pattern (hourly) mentioned in the prompt"
+        ],
+        "key_observations": [
+          "The response consists of random characters",
+          "Zero technical terminology used",
+          "No methodology provided"
+        ],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 1,
+          "problem_solving": 1,
+          "technical_accuracy": 1
+        },
+        "red_flags": [
+          "Response is gibberish/non-responsive"
+        ],
+        "score": 1,
+        "strengths": [
+          "None identified"
+        ]
+      }
+    },
+    {
+      "question": "Describe a scenario where you inherited a 'Big Ball of Mud' legacy system that was critical to the business. You were tasked with adding a high-priority feature that the current architecture couldn't support. How did you decide between the 'Strangler Fig' pattern or a 'Big Bang' rewrite, and what specific metrics did you use to justify your decision to non-technical stakeholders?",
+      "answer": "sfheuf",
+      "evaluation": {
+        "feedback": "I appreciate your interest in this role, but the current response does not provide any technical or situational information. To improve, try to walk through a specific time you dealt with old code, even if it's a small example. I look forward to hearing your actual thoughts on balancing feature delivery with technical debt!",
+        "improvements": [
+          "Provide a coherent explanation of the Strangler Fig pattern",
+          "Discuss specific metrics like MTTR or deployment frequency to justify architectural decisions"
+        ],
+        "key_observations": [
+          "Input consists of nonsensical characters ('sfheuf')",
+          "No understanding of Strangler Fig vs. Big Bang patterns shown",
+          "Failed to address the prompt entirely"
+        ],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 1,
+          "problem_solving": 1,
+          "technical_accuracy": 1
+        },
+        "red_flags": [
+          "Candidate provided a gibberish/non-responsive answer"
+        ],
+        "score": 1,
+        "strengths": [
+          "None"
+        ]
+      }
+    },
+    {
+      "question": "When designing a multi-tenant API gateway, you need to implement a rate-limiting strategy that prevents a single 'noisy neighbor' from exhausting the global connection pool. How would you architect a solution using a sliding window counter that persists across multiple horizontally scaled gateway nodes without introducing a single point of failure or significant latency bottleneck?",
+      "answer": "eygkj",
+      "evaluation": {
+        "feedback": "I appreciate the effort to submit, but it looks like the response provided was a placeholder or a typo. To tackle this in a real-world scenario, you might consider using a distributed store like Redis with Lua scripting to manage the sliding window logic efficiently across nodes. I'd love to see a more detailed architectural breakdown in your next attempt!",
+        "improvements": [
+          "Provide a coherent technical explanation of distributed rate limiting",
+          "Explain the use of a shared data store (like Redis) to avoid single points of failure"
+        ],
+        "key_observations": [
+          "Candidate provided non-lexical/gibberish input",
+          "No architectural concepts were addressed"
+        ],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 1,
+          "problem_solving": 1,
+          "technical_accuracy": 1
+        },
+        "red_flags": [
+          "The response is completely nonsensical and shows zero effort to answer the technical prompt."
+        ],
+        "score": 1,
+        "strengths": [
+          "None identified"
+        ]
+      }
+    }
+  ],
+  "candidate_id": "Resume_10751444_DESIGNER",
+  "current_question": 0,
+  "domain": "SOFTWARE_ENGINEERING",
+  "job_context": "We are looking for a skilled professional in the Software Engineering domain with strong technical expertise and problem-solving abilities.",
+  "questions": [
+    {
+      "category": "Architecture",
+      "difficulty": "Hard",
+      "focus_area": "Distributed Transactions & Eventual Consistency",
+      "question": "In a distributed microservices environment, you are implementing a Saga pattern to manage a multi-stage transaction across three services. If the second service fails due to a transient network error, but the third service has already received a 'ghost' event and partially processed it, how would you design your compensation logic to ensure eventual consistency without causing duplicate side effects?"
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Hard",
+      "focus_area": "System Performance & Observability",
+      "question": "You are troubleshooting a production service where CPU usage spikes to 100% every hour on the dot, causing significant latency for exactly 45 seconds. The service uses a garbage-collected language and handles high-volume WebSocket connections. Walk me through your methodology for isolating whether this is a Stop-the-World GC issue, a poorly optimized cron job, or a lock contention problem in the thread pool."
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Technical Debt & Stakeholder Management",
+      "question": "Describe a scenario where you inherited a 'Big Ball of Mud' legacy system that was critical to the business. You were tasked with adding a high-priority feature that the current architecture couldn't support. How did you decide between the 'Strangler Fig' pattern or a 'Big Bang' rewrite, and what specific metrics did you use to justify your decision to non-technical stakeholders?"
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Hard",
+      "focus_area": "Scalability & Rate Limiting Algorithms",
+      "question": "When designing a multi-tenant API gateway, you need to implement a rate-limiting strategy that prevents a single 'noisy neighbor' from exhausting the global connection pool. How would you architect a solution using a sliding window counter that persists across multiple horizontally scaled gateway nodes without introducing a single point of failure or significant latency bottleneck?"
+    },
+    {
+      "category": "Architecture",
+      "difficulty": "Hard",
+      "focus_area": "Microservices Data Modeling",
+      "question": "You are moving a relational database schema from a monolithic architecture to a decentralized model where each service owns its data. How do you handle the challenge of 'Data Gravity' for shared entities, like a 'User' table, that are required by ten different services? Specifically, how do you manage the trade-offs between data duplication, API-based lookups, and the risk of creating a distributed monolith?"
+    }
+  ],
+  "started_at": "2026-03-10T12:19:11.071938",
+  "status": "completed",
+  "candidate_name": "Resume_10751444_DESIGNER",
+  "completed_at": "2026-03-10T12:21:49.683481",
+  "overall_score": 1.0
+}

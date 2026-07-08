@@ -1,0 +1,145 @@
+{
+  "answers": [
+    {
+      "question": "Tell me about a challenging project you worked on.",
+      "answer": "dfsfsfs",
+      "evaluation": {
+        "feedback": "Evaluation unavailable. Answer recorded for manual review.",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 5
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What are your strongest technical skills?",
+      "answer": "asdada",
+      "evaluation": {
+        "feedback": "Evaluation unavailable. Answer recorded for manual review.",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 5
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "How do you handle tight deadlines?",
+      "answer": "dadada",
+      "evaluation": {
+        "feedback": "Evaluation unavailable. Answer recorded for manual review.",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 5
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "Describe a time you had to learn a new technology quickly.",
+      "answer": "s",
+      "evaluation": {
+        "feedback": "Evaluation unavailable. Answer recorded for manual review.",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 5
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "How do you ensure code quality?",
+      "answer": "sdadad",
+      "evaluation": {
+        "feedback": "Evaluation unavailable. Answer recorded for manual review.",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 5
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    }
+  ],
+  "candidate_id": "Resume_12415691_DESIGNER",
+  "current_question": 0,
+  "domain": "Mobile Development",
+  "job_context": "Job Title: Senior Mobile Developer\n\nRequirements:\n- 4+ years of experience in mobile app development\n- Expert knowledge of iOS (Swift) and/or Android (Kotlin/Java)\n- Experience with cross-platform frameworks (React Native, Flutter) is a plus\n- Strong understanding of mobile UI/UX design principles\n- Proficiency in mobile app architecture patterns (MVVM, MVI, Clean Architecture)\n- Experience with RESTful APIs and mobile backend integration\n- Knowledge of mobile testing frameworks and best practic",
+  "questions": [
+    {
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "focus_area": "Experience",
+      "question": "Tell me about a challenging project you worked on."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Easy",
+      "focus_area": "Self-Assessment",
+      "question": "What are your strongest technical skills?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Management",
+      "question": "How do you handle tight deadlines?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Adaptability",
+      "question": "Describe a time you had to learn a new technology quickly."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Medium",
+      "focus_area": "Best Practices",
+      "question": "How do you ensure code quality?"
+    }
+  ],
+  "started_at": "2026-01-16T19:54:01.500876",
+  "status": "completed",
+  "candidate_name": "Resume_12415691_DESIGNER",
+  "completed_at": "2026-01-16T19:54:33.072417",
+  "overall_score": 5.0
+}

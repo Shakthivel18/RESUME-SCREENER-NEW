@@ -1,0 +1,77 @@
+{
+  "candidate_id": "Resume_10751444_DESIGNER",
+  "current_status": "finalized",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T22:59:54.963689",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "rejected",
+      "timestamp": "2026-03-07T23:00:57.979675",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T23:01:43.390300",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:14.400394",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    },
+    {
+      "from_status": "cleared",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-10T12:18:13.823617",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-10T12:18:30.041878",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "interviewed",
+      "timestamp": "2026-03-10T12:21:49.687421",
+      "user": "system",
+      "note": "Interview completed successfully"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "shortlisted",
+      "timestamp": "2026-04-09T20:36:31.862740",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-04-09T20:36:51.047878",
+      "user": "admin",
+      "note": ""
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-EA904I",
+  "score": 50.65337068616843,
+  "experience_years": 5,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_10751444_DESIGNER",
+  "recruiter_message": "committed\n"
+}

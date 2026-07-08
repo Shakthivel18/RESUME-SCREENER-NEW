@@ -1,0 +1,238 @@
+{
+  "candidate_id": "Resume_85101052_DESIGNER",
+  "current_status": "finalized",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T17:34:25.566942",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T22:17:54.066679",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T23:24:11.073695",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "rejected",
+      "timestamp": "2026-03-09T17:28:14.489106",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:28:33.226016",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-09T17:52:33.837864",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T21:15:14.732658",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:42:03.080528",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    },
+    {
+      "from_status": "cleared",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-10T10:27:39.969772",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-10T10:27:46.735187",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "interviewed",
+      "timestamp": "2026-03-10T10:34:52.895162",
+      "user": "system",
+      "note": "Interview completed successfully"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:20:18.481959",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:20:31.530803",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:21:19.626600",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "rejected",
+      "timestamp": "2026-03-30T22:21:26.161587",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "rejected",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:23:42.601512",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:23:51.024781",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:34:08.663284",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:34:11.578103",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:34:23.392863",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:34:34.035738",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:35:14.238666",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:35:18.392351",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:35:40.100037",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:35:43.561344",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:37:17.720374",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:37:21.203068",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-30T22:51:34.527972",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-30T22:52:08.446038",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "finalized",
+      "to_status": "interviewed",
+      "timestamp": "2026-03-30T23:05:30.287731",
+      "user": "system",
+      "note": "Interview completed successfully"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "shortlisted",
+      "timestamp": "2026-04-09T20:37:33.836710",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-04-09T20:37:38.486279",
+      "user": "admin",
+      "note": ""
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-6TDEQL",
+  "score": 46.186054453687916,
+  "experience_years": 5,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_85101052_DESIGNER",
+  "recruiter_message": "great job , final intervie call will happen in few days , be committed."
+}

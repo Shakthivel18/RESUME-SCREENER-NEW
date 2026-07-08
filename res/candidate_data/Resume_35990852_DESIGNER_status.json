@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_35990852_DESIGNER",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T22:36:36.018866",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:39.014896",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-BXZ6NV",
+  "score": 32.350957933151605,
+  "experience_years": 0,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_35990852_DESIGNER"
+}

@@ -1,0 +1,125 @@
+{
+  "answers": [
+    {
+      "question": "Explain the difference between a process and a thread.",
+      "answer": "A process is an independent program in execution with its own isolated memory space (heavyweight), while a thread is the smallest unit of execution within a process, sharing memory and resources with other threads (lightweight)",
+      "evaluation": {
+        "feedback": "Relevant answer, though could be more specific. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5.1,
+          "cultural_fit": 5,
+          "problem_solving": 4.1,
+          "technical_accuracy": 6.1
+        },
+        "red_flags": [],
+        "score": 5.1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What is the CAP theorem?",
+      "answer": "The CAP theorem states that distributed data systems can only provide two of three guarantees simultaneously: Consistency (all nodes see the same data), Availability (every request receives a response), and Partition Tolerance (system works despite network failures). Because network partitions are inevitable in distributed systems, the trade-off is actually between Consistency and Availability (CP vs. AP)",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 4.8,
+          "cultural_fit": 5,
+          "problem_solving": 4.8,
+          "technical_accuracy": 5.8
+        },
+        "red_flags": [],
+        "score": 4.8,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "Tell me about a challenging project you worked on.",
+      "answer": "Reverse Engineering & Analysis: I led efforts to analyze the legacy codebase and database to map dependencies, effectively rebuilding the functional documentation from scratch.",
+      "evaluation": {
+        "feedback": "Relevant answer, though could be more specific. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 5,
+          "cultural_fit": 5,
+          "problem_solving": 5,
+          "technical_accuracy": 6
+        },
+        "red_flags": [],
+        "score": 5,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What are your strongest technical skills?",
+      "answer": "Top technical skills in demand for 2025\u20132026 include artificial intelligence (AI)/machine learning (ML), cloud computing, data analysis/visualization, cybersecurity, and proficiency in programming languages like Python, SQL, and Java. Other critical competencies include DevOps practices, blockchain technology, UI/UX design, and specialized software (e.g., CAD for engineering, ERP tools like SAP and Oracle).\n",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 3.6,
+          "cultural_fit": 5,
+          "problem_solving": 3.6,
+          "technical_accuracy": 4.6
+        },
+        "red_flags": [],
+        "score": 3.6,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    }
+  ],
+  "candidate_id": "Resume_27536013_INFORMATION_TECHNOLOGY",
+  "current_question": 0,
+  "domain": "SOFTWARE_ENGINEERING",
+  "job_context": "We are looking for a skilled professional in the Software Engineering domain with strong technical expertise and problem-solving abilities.",
+  "questions": [
+    {
+      "category": "Technical",
+      "difficulty": "Medium",
+      "focus_area": "OS Concepts",
+      "question": "Explain the difference between a process and a thread."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Hard",
+      "focus_area": "System Design",
+      "question": "What is the CAP theorem?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "focus_area": "Experience",
+      "question": "Tell me about a challenging project you worked on."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Easy",
+      "focus_area": "Self-Assessment",
+      "question": "What are your strongest technical skills?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Management",
+      "question": "How do you handle tight deadlines?"
+    }
+  ],
+  "started_at": "2026-03-09T20:33:27.732373",
+  "status": "completed",
+  "candidate_name": "Resume_27536013_INFORMATION_TECHNOLOGY",
+  "completed_at": "2026-03-09T20:35:49.800138",
+  "overall_score": 4.625
+}

@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_52246737_INFORMATION_TECHNOLOGY",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-07T16:14:30.952842",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:59.178355",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-N0RMD2",
+  "score": 44.733536803912536,
+  "experience_years": 5,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_52246737_INFORMATION_TECHNOLOGY"
+}

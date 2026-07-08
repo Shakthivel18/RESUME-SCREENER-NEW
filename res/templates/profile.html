@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aghamarsh Kuppachi - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Dark text */
+        }
+        .section {
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header-link:hover {
+            color: #1e40af; /* Darker blue on hover */
+            transform: translateY(-2px);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary {
+            background-color: #3b82f6; /* Blue */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px; /* Fully rounded */
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb; /* Darker blue */
+            transform: translateY(-2px);
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+        }
+        .icon-animation {
+            transition: transform 0.3s ease-in-out;
+        }
+        .icon-animation:hover {
+            transform: scale(1.1);
+        }
+        /* GIF styling */
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+        .gif-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <header class="bg-white shadow-sm py-4 sticky top-0 z-50 rounded-b-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="text-2xl font-bold text-gray-800 rounded-md">
+                Aghamarsh Kuppachi
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-blue-700 font-medium header-link">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-blue-700 font-medium header-link">Skills</a>
+                <a href="#portfolio" class="text-gray-600 hover:text-blue-700 font-medium header-link">Portfolio</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-700 font-medium header-link">Contact</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-700 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white px-4 pt-2 pb-4 space-y-2 rounded-b-lg">
+            <a href="#about" class="block text-gray-600 hover:text-blue-700 font-medium py-2 rounded-md">About</a>
+            <a href="#skills" class="block text-gray-600 hover:text-blue-700 font-medium py-2 rounded-md">Skills</a>
+            <a href="#portfolio" class="block text-gray-600 hover:text-blue-700 font-medium py-2 rounded-md">Portfolio</a>
+            <a href="#contact" class="block text-gray-600 hover:text-blue-700 font-medium py-2 rounded-md">Contact</a>
+        </div>
+    </header>
+
+    <section id="about" class="section text-center">
+        <div class="flex flex-col items-center">
+            <img src="https://placehold.co/150x150/cbd5e1/475569?text=AK" alt="Profile Picture" class="rounded-full w-36 h-36 object-cover mb-6 shadow-lg border-4 border-white">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
+                Aghamarsh Kuppachi
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 mb-6">
+                Integrated M.Tech in Computer Science and Data Science
+            </p>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl">
+                A passionate and driven student at Vellore Institute of Technology, specializing in the exciting fields of Computer Science and Data Science. Eager to learn, innovate, and contribute to cutting-edge technologies.
+            </p>
+            <div class="flex space-x-4">
+                <a href="#contact" class="btn-primary">Get in Touch</a>
+                <a href="#" class="btn-primary bg-gray-200 text-gray-800 hover:bg-gray-300 hover:text-gray-900">Download CV <i class="fas fa-download ml-2"></i></a>
+            </div>
+            <div class="gif-container">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3VjZ25jYmZ2d294aXQ0d25wZ2t3N3U3b3N6bWRsN2F1Z2R1eW5zZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/qgM0q41yQjQjQ/giphy.gif" alt="Coding GIF">
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section bg-blue-50 rounded-lg shadow-inner">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">My Skills</h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div class="card flex flex-col items-center text-center">
+                <i class="fab fa-python text-6xl text-blue-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Python</h3>
+                <p class="text-gray-600">Proficient in Python for data analysis, machine learning, and web development.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fas fa-database text-6xl text-green-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">SQL</h3>
+                <p class="text-gray-600">Strong understanding of relational databases and SQL queries.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fas fa-chart-line text-6xl text-red-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Data Analysis</h3>
+                <p class="text-gray-600">Experienced with data cleaning, visualization, and statistical analysis.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fas fa-brain text-6xl text-purple-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Machine Learning</h3>
+                <p class="text-gray-600">Knowledgeable in various ML algorithms and frameworks.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fab fa-html5 text-6xl text-orange-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">HTML5</h3>
+                <p class="text-gray-600">Solid foundation in structuring web content.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fab fa-css3-alt text-6xl text-blue-400 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">CSS3</h3>
+                <p class="text-gray-600">Styling web pages with modern CSS techniques and frameworks.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fab fa-js text-6xl text-yellow-500 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">JavaScript</h3>
+                <p class="text-gray-600">Interactive web development and client-side scripting.</p>
+            </div>
+            <div class="card flex flex-col items-center text-center">
+                <i class="fab fa-git-alt text-6xl text-gray-700 mb-4 icon-animation"></i>
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">Git/GitHub</h3>
+                <p class="text-gray-600">Version control and collaborative development.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="section">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">My Portfolio</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="card">
+                <img src="https://placehold.co/400x250/e2e8f0/475569?text=Project+1" alt="Project 1" class="rounded-md mb-4 w-full h-48 object-cover">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Project Title One</h3>
+                <p class="text-gray-600 mb-4">A brief description of your project, highlighting the technologies used and its purpose. This could be a data science project, a web application, etc.</p>
+                <a href="#" class="text-blue-600 hover:underline font-medium">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+            </div>
+            <div class="card">
+                <img src="https://placehold.co/400x250/e2e8f0/475569?text=Project+2" alt="Project 2" class="rounded-md mb-4 w-full h-48 object-cover">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Project Title Two</h3>
+                <p class="text-gray-600 mb-4">Another project description. Emphasize your role and the impact of the project. Keep it concise and engaging.</p>
+                <a href="#" class="text-blue-600 hover:underline font-medium">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+            </div>
+            <div class="card">
+                <img src="https://placehold.co/400x250/e2e8f0/475569?text=Project+3" alt="Project 3" class="rounded-md mb-4 w-full h-48 object-cover">
+                <h3 class="text-2xl font-semibold text-gray-800 mb-2">Project Title Three</h3>
+                <p class="text-gray-600 mb-4">You can add more project cards here. Consider adding screenshots or mockups of your work to make it visually appealing.</p>
+                <a href="#" class="text-blue-600 hover:underline font-medium">View Project <i class="fas fa-external-link-alt ml-1"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-blue-50 rounded-lg shadow-inner">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Get in Touch</h2>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8">
+            <div class="text-center md:text-left">
+                <p class="text-lg text-gray-700 mb-4">
+                    I'm always open to new opportunities and collaborations. Feel free to reach out!
+                </p>
+                <ul class="space-y-4 text-xl">
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-envelope text-blue-600 mr-3"></i>
+                        <a href="mailto:aghamarsh.kuppachi2023@vit.ac.in" class="text-gray-700 hover:text-blue-700">aghamarsh.kuppachi2023@vit.ac.in</a>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-phone-alt text-blue-600 mr-3"></i>
+                        <a href="tel:+91XXXXXXXX05" class="text-gray-700 hover:text-blue-700">+91 XXXXXXXX05</a>
+                    </li>
+                    <li class="flex items-center justify-center md:justify-start">
+                        <i class="fas fa-map-marker-alt text-blue-600 mr-3"></i>
+                        <span class="text-gray-700">Vellore, Tamil Nadu, India</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaW50a2l4eDk1b3Q1a2V1c3Izd216Z2k0aW15bW9xNG5wYm5hZ292ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l0HlSH2gsSShtgqDy/giphy.gif" alt="Contact GIF" class="rounded-lg shadow-md w-full">
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12 rounded-t-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p>&copy; 2023-2028 Aghamarsh Kuppachi. All rights reserved.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://github.com/yourusername" target="_blank" class="text-gray-400 hover:text-white text-2xl icon-animation" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="text-gray-400 hover:text-white text-2xl icon-animation" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

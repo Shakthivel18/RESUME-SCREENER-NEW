@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_26801767_INFORMATION_TECHNOLOGY",
+  "current_status": "finalized",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-10T12:30:21.768236",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "finalized",
+      "timestamp": "2026-03-10T12:30:35.722136",
+      "user": "admin",
+      "note": ""
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-FS3FZM",
+  "score": 43.19406376018146,
+  "experience_years": 30,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_26801767_INFORMATION_TECHNOLOGY"
+}

@@ -1,0 +1,145 @@
+{
+  "answers": [
+    {
+      "question": "Tell me about a challenging project you worked on.",
+      "answer": "sftgsgssggsf",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "What are your strongest technical skills?",
+      "answer": "gdfhdhfghfgggggg ffffffffffffffffffffffffffff",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "How do you handle tight deadlines?",
+      "answer": "asfdddddd",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "Describe a time you had to learn a new technology quickly.",
+      "answer": "soon\n",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    },
+    {
+      "question": "How do you ensure code quality?",
+      "answer": "hello \n",
+      "evaluation": {
+        "feedback": "Answer seems brief or off-topic based on key terms. (Semantic Analysis)",
+        "improvements": [],
+        "key_observations": [],
+        "metrics": {
+          "communication_clarity": 1,
+          "cultural_fit": 5,
+          "problem_solving": 1,
+          "technical_accuracy": 2
+        },
+        "red_flags": [],
+        "score": 1,
+        "strengths": [
+          "Response recorded"
+        ]
+      }
+    }
+  ],
+  "candidate_id": "Resume_10751444_DESIGNER",
+  "current_question": 0,
+  "domain": "UI/UX Design",
+  "job_context": "Job Title: Senior UI/UX Designer\n\nRequirements:\n- 4+ years of experience in UI/UX design\n- Expert knowledge of design tools (Figma, Sketch, Adobe XD)\n- Strong portfolio demonstrating user-centered design\n- Experience with user research and usability testing\n- Proficiency in wireframing, prototyping, and mockup creation\n- Strong understanding of design systems and component libraries\n- Knowledge of accessibility standards and inclusive design\n- Experience with interaction design and micro-animati",
+  "questions": [
+    {
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "focus_area": "Experience",
+      "question": "Tell me about a challenging project you worked on."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Easy",
+      "focus_area": "Self-Assessment",
+      "question": "What are your strongest technical skills?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Management",
+      "question": "How do you handle tight deadlines?"
+    },
+    {
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "focus_area": "Adaptability",
+      "question": "Describe a time you had to learn a new technology quickly."
+    },
+    {
+      "category": "Technical",
+      "difficulty": "Medium",
+      "focus_area": "Best Practices",
+      "question": "How do you ensure code quality?"
+    }
+  ],
+  "started_at": "2026-01-16T20:10:25.017712",
+  "status": "completed",
+  "candidate_name": "Resume_10751444_DESIGNER",
+  "completed_at": "2026-01-16T20:11:09.959238",
+  "overall_score": 1.0
+}

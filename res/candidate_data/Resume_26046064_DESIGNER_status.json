@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_26046064_DESIGNER",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:15:06.547909",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:32.862236",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-H8KHLK",
+  "score": 33.3910157557817,
+  "experience_years": 14,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_26046064_DESIGNER"
+}

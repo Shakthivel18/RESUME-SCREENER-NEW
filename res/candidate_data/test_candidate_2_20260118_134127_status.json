@@ -1,0 +1,29 @@
+{
+  "candidate_id": "test_candidate_2_20260118_134127",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "reviewed",
+      "timestamp": "2026-01-18T13:41:29.484184",
+      "user": "test_admin",
+      "note": ""
+    },
+    {
+      "from_status": "reviewed",
+      "to_status": "shortlisted",
+      "timestamp": "2026-01-18T13:41:31.529127",
+      "user": "test_admin",
+      "note": "Bulk shortlisted for final round"
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:43.873832",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": []
+}

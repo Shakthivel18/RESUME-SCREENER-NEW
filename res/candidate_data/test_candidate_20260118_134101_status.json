@@ -1,0 +1,46 @@
+{
+  "candidate_id": "test_candidate_20260118_134101",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "reviewed",
+      "timestamp": "2026-01-18T13:41:07.156824",
+      "user": "test_admin",
+      "note": "Initial review completed"
+    },
+    {
+      "from_status": "reviewed",
+      "to_status": "interviewed",
+      "timestamp": "2026-01-18T13:41:17.287393",
+      "user": "test_admin",
+      "note": "Technical interview completed"
+    },
+    {
+      "from_status": "interviewed",
+      "to_status": "shortlisted",
+      "timestamp": "2026-01-18T13:41:31.526409",
+      "user": "test_admin",
+      "note": "Bulk shortlisted for final round"
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:41:45.762139",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [
+    {
+      "text": "Good communication skills demonstrated",
+      "timestamp": "2026-01-18T13:41:11.185410",
+      "user": "test_admin"
+    }
+  ],
+  "tags": [
+    "python",
+    "senior",
+    "remote"
+  ]
+}

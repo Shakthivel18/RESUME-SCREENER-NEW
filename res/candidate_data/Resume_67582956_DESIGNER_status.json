@@ -1,0 +1,27 @@
+{
+  "candidate_id": "Resume_67582956_DESIGNER",
+  "current_status": "cleared",
+  "history": [
+    {
+      "from_status": "new",
+      "to_status": "shortlisted",
+      "timestamp": "2026-03-09T17:51:50.174187",
+      "user": "admin",
+      "note": ""
+    },
+    {
+      "from_status": "shortlisted",
+      "to_status": "cleared",
+      "timestamp": "2026-03-09T21:42:01.130828",
+      "user": "recruiter",
+      "note": "Candidate archived/cleared from view"
+    }
+  ],
+  "notes": [],
+  "tags": [],
+  "ref_id": "REF-XCOZ34",
+  "score": 38.347261459807264,
+  "experience_years": 16,
+  "jd_domain": "Data Science & Machine Learning",
+  "name": "Resume_67582956_DESIGNER"
+}

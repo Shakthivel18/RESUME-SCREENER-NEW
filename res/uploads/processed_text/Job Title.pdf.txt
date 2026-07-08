@@ -1,0 +1,9 @@
+Job Title: Senior Python Developer 
+We are seeking a Python Developer to join our engineering team. You will be responsible for writing 
+and testing scalable code, developing back-end components, and integrating user-facing elements. 
+Requirements: 
+- Expert knowledge of Python and web frameworks (Django, Flask). 
+- Experience with cloud services (AWS, Azure) and containerization (Docker, Kubernetes). 
+- Strong understanding of databases (PostgreSQL, MongoDB). 
+ 
+- Ability to write clean, efficient, and debuggable code. 
