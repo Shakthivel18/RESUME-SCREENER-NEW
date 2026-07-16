@@ -1,4 +1,5 @@
 # app.py
+# pyrefly: ignore [missing-import]
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
@@ -74,11 +75,22 @@ def upload_resume():
     try:
         raw_text = utils.extract_text_from_file(filepath)
         if raw_text:
-            text_filename = filename + ".txt"
-            text_path = os.path.join(app.config['PROCESSED_FOLDER'], text_filename)
-            with open(text_path, 'w', encoding='utf-8') as f:
-                f.write(raw_text)
-            print(f"Text extracted and saved for: {filename}")
+            # Parse sections and extract keywords
+            sections = utils.segment_resume_sections(raw_text)
+            keywords = utils.extract_keywords(raw_text)
+            
+            # Simple highlights structure (deduplicated keywords)
+            highlights = list(set(keywords))
+            
+            data = {
+                "raw_text": raw_text,
+                "sections": sections,
+                "keywords": keywords,
+                "highlights": highlights
+            }
+            # Compress and save
+            utils.save_compressed_candidate_data(candidate_id, data)
+            print(f"Text extracted, segmented, and compressed for: {filename}")
         else:
             print(f"Warning: No text extracted from {filename}")
             
@@ -188,21 +200,21 @@ def candidate_login():
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
+# NOTE: This route is duplicated below as get_resume_content which overrides it.
+# Kept as-is to preserve exact original routing structure.
 @app.route('/api/get-resume/<resume_id>', methods=['GET'])
 def get_resume(resume_id):
     """Get resume content by ID"""
     try:
-        # Try to find the resume text file
-        processed_dir = app.config['PROCESSED_FOLDER']
-        text_file = os.path.join(processed_dir, f"{resume_id}.txt")
-        
-        if os.path.exists(text_file):
-            with open(text_file, 'r', encoding='utf-8') as f:
-                content = f.read()
+        data = utils.load_compressed_candidate_data(resume_id)
+        if data:
             return jsonify({
                 "success": True,
                 "id": resume_id,
-                "content": content
+                "content": data.get("raw_text", ""),
+                "sections": data.get("sections", {}),
+                "keywords": data.get("keywords", []),
+                "highlights": data.get("highlights", [])
             }), 200
         else:
             return jsonify({
@@ -218,25 +230,42 @@ def get_resume(resume_id):
 
 
 def get_all_resumes():
-    """Returns only currently uploaded files."""
-    # 1. Start with empty list (CSV Disabled)
+    """Returns only currently uploaded files (supporting compressed and fallback formats)."""
     all_resumes = []
     
-    # 2. Add Uploaded Files
     processed_dir = app.config['PROCESSED_FOLDER']
     if os.path.exists(processed_dir):
-        for text_file in os.listdir(processed_dir):
-            if text_file.endswith(".txt"):
-                original_name = text_file.replace(".txt", "")
-                with open(os.path.join(processed_dir, text_file), 'r', encoding='utf-8') as f:
-                    content = f.read()
-                
-                all_resumes.append({
-                    "id": original_name,
-                    "name": original_name,
-                    "text": content,
-                    "source": "upload"
-                })
+        seen_ids = set()
+        
+        # 1. Process compressed .json.gz files first
+        for filename in os.listdir(processed_dir):
+            if filename.endswith(".json.gz"):
+                candidate_id = filename.replace(".json.gz", "")
+                data = utils.load_compressed_candidate_data(candidate_id)
+                if data:
+                    all_resumes.append({
+                        "id": candidate_id,
+                        "name": candidate_id,
+                        "text": data.get("raw_text", ""),
+                        "source": "upload"
+                    })
+                    seen_ids.add(candidate_id)
+                    
+        # 2. Fallback to raw .txt files
+        for filename in os.listdir(processed_dir):
+            if filename.endswith(".txt") and not filename.endswith(".json.gz.txt"):
+                candidate_id = filename.replace(".txt", "")
+                if candidate_id not in seen_ids:
+                    data = utils.load_compressed_candidate_data(candidate_id)
+                    if data:
+                        all_resumes.append({
+                            "id": candidate_id,
+                            "name": candidate_id,
+                            "text": data.get("raw_text", ""),
+                            "source": "upload"
+                        })
+                        seen_ids.add(candidate_id)
+                        
     return all_resumes
 
 @app.route('/api/match-resumes', methods=['POST'])
@@ -358,7 +387,6 @@ def match_resumes():
             
             # --- PERSISTENCE: Save scores to status JSON ---
             try:
-                import json
                 os.makedirs('candidate_data', exist_ok=True)
                 candidate_id = res['id']
                 status_file = f'candidate_data/{candidate_id}_status.json'
@@ -409,25 +437,26 @@ def match_resumes():
         print(f"Matching error: {e}")
         return jsonify({"message": "Error during matching process."}), 500
 
+# NOTE: This route overrides the earlier get_resume route definition.
+# Kept as-is to preserve exact original routing structure.
 @app.route('/api/get-resume/<resume_id>', methods=['GET'])
 def get_resume_content(resume_id):
     """Fetches resume content by ID from either CSV or File."""
     print(f"INFO: Fetching content for resume_id: {resume_id}")
     try:
-        # 2. Check File System
-        processed_dir = app.config['PROCESSED_FOLDER']
+        data = utils.load_compressed_candidate_data(resume_id)
+        if data:
+            content = data.get("raw_text", "")
+            print(f"INFO: Found file content, length: {len(content)}")
+            return jsonify({
+                "content": content, 
+                "name": resume_id,
+                "sections": data.get("sections", {}),
+                "keywords": data.get("keywords", []),
+                "highlights": data.get("highlights", [])
+            })
         
-        # Exact match attempt
-        possible_name = resume_id + ".txt"
-        file_path = os.path.join(processed_dir, possible_name)
-        
-        if os.path.exists(file_path):
-             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                content = f.read()
-                print(f"INFO: Found file content, length: {len(content)}")
-                return jsonify({"content": content, "name": resume_id})
-        
-        print(f"WARNING: File not found at {file_path}")
+        print(f"WARNING: File not found for candidate {resume_id}")
         return jsonify({"content": "Resume content file not found on server.", "name": "Unknown"}), 404
 
     except Exception as e:

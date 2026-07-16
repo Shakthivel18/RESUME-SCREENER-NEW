@@ -224,7 +224,7 @@ def get_candidate_stats():
                             if status in stats:
                                 stats[status] += 1
                             total += 1
-                    except:
+                    except Exception:
                         continue
         
         return jsonify({
@@ -471,7 +471,7 @@ def search_candidates():
                             'notes_count': len(status_data.get('notes', [])),
                             'last_updated': status_data.get('history', [{}])[-1].get('timestamp', '') if status_data.get('history') else ''
                         })
-                    except:
+                    except Exception:
                         continue
         
         return jsonify({
@@ -551,7 +551,7 @@ def get_finalized_candidates():
                                      if h.get('to_status') == 'finalized'), ''
                                 )
                             })
-                    except:
+                    except Exception:
                         continue
 
         return jsonify({'success': True, 'candidates': finalized, 'count': len(finalized)}), 200

@@ -3,8 +3,9 @@ import os
 import re
 
 # Configuration
-CSV_PATH = r'e:/RESUME/resume/Resume.csv'
-OUTPUT_DIR = r'e:/RESUME/uploads/processed_text'
+_script_dir = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH = os.path.join(_script_dir, "..", "Resume.csv")
+OUTPUT_DIR = os.path.join(_script_dir, "uploads", "processed_text")
 LIMIT = 50  # Number of resumes to seed
 
 def seed_resumes():

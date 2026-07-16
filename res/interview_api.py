@@ -26,7 +26,10 @@ def start_interview():
         # 1. Get Resume Text (Handle missing files gracefully)
         resume_text = "Resume text unavailable."
         try:
-            extracted = utils.extract_text_from_file(f"uploads/processed_text/{candidate_id}")
+            path = f"uploads/processed_text/{candidate_id}"
+            if not os.path.exists(path) and not candidate_id.endswith(".txt"):
+                path = f"uploads/processed_text/{candidate_id}.txt"
+            extracted = utils.extract_text_from_file(path)
             if extracted:
                 resume_text = extracted
         except Exception as e:
@@ -76,7 +79,10 @@ def submit_answer():
         resume_text = "Context unavailable"
         try:
              # Try to load resume context for better evaluation
-             extracted = utils.extract_text_from_file(f"uploads/processed_text/{candidate_id}")
+             path = f"uploads/processed_text/{candidate_id}"
+             if not os.path.exists(path) and not candidate_id.endswith(".txt"):
+                 path = f"uploads/processed_text/{candidate_id}.txt"
+             extracted = utils.extract_text_from_file(path)
              if extracted:
                  resume_text = extracted
         except Exception as e:

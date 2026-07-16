@@ -4,10 +4,13 @@ Implements domain classification, multi-factor scoring, and intelligent filterin
 """
 
 import re
+import os
 import numpy as np
+import joblib
 from collections import Counter
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from gensim.models import Word2Vec
 import logging
 
 logger = logging.getLogger(__name__)
@@ -24,11 +27,78 @@ class AdvancedResumeScorer:
         self.weights = config.SCORING_WEIGHTS
         self.thresholds = config.THRESHOLDS
         
+        # Load ML Models
+        _script_dir = os.path.dirname(os.path.abspath(__file__))
+        classifier_path = os.path.join(_script_dir, "models", "domain_classifier_pipeline.joblib")
+        w2v_path = os.path.join(_script_dir, "models", "resume_word2vec.model")
+        
+        try:
+            if os.path.exists(classifier_path):
+                self.classifier = joblib.load(classifier_path)
+                logger.info("Loaded ML Domain Classifier model successfully.")
+            else:
+                self.classifier = None
+                logger.warning(f"Domain classifier model not found at {classifier_path}. Using fallback.")
+        except Exception as e:
+            self.classifier = None
+            logger.error(f"Error loading domain classifier model: {e}")
+            
+        try:
+            if os.path.exists(w2v_path):
+                self.w2v_model = Word2Vec.load(w2v_path)
+                logger.info("Loaded Word2Vec embedding model successfully.")
+            else:
+                self.w2v_model = None
+                logger.warning(f"Word2Vec model not found at {w2v_path}. Using fallback.")
+        except Exception as e:
+            self.w2v_model = None
+            logger.error(f"Error loading Word2Vec model: {e}")
+        
     def detect_domain(self, text):
         """
-        Detect the most relevant domain(s) for a job description or resume
+        Detect the most relevant domain(s) for a job description or resume using the trained ML model.
         Returns: List of (domain_key, score) tuples sorted by relevance
         """
+        if not self.classifier:
+            return self._detect_domain_fallback(text)
+            
+        try:
+            # Predict probability distribution across 24 categories
+            probs = self.classifier.predict_proba([text])[0]
+            classes = self.classifier.classes_
+            
+            # Map pre-trained category labels to app domain keys
+            category_to_domain = {
+                'INFORMATION-TECHNOLOGY': 'SOFTWARE_ENGINEERING',
+                'ENGINEERING': 'SOFTWARE_ENGINEERING',
+                'DESIGNER': 'UI_UX_DESIGN',
+                'HR': 'GENERAL_IT',
+                'BUSINESS-DEVELOPMENT': 'PRODUCT_MANAGEMENT',
+                'FINANCE': 'GENERAL_IT',
+                'ACCOUNTANT': 'GENERAL_IT'
+            }
+            
+            domain_scores = {k: 0.0 for k in self.domains.keys()}
+            
+            for cls, prob in zip(classes, probs):
+                domain_key = category_to_domain.get(cls, 'GENERAL_IT')
+                # If category directly maps to a domain (after converting format)
+                clean_cls = cls.replace('-', '_').upper()
+                if clean_cls in self.domains:
+                    domain_scores[clean_cls] = max(domain_scores[clean_cls], float(prob))
+                else:
+                    domain_scores[domain_key] = max(domain_scores[domain_key], float(prob))
+            
+            # Sort by score descending
+            sorted_domains = sorted(domain_scores.items(), key=lambda x: x[1], reverse=True)
+            return sorted_domains
+            
+        except Exception as e:
+            logger.error(f"ML Domain detection failed: {e}. Using fallback.")
+            return self._detect_domain_fallback(text)
+            
+    def _detect_domain_fallback(self, text):
+        """Rule-based fallback for domain detection"""
         text_lower = text.lower()
         domain_scores = {}
         
@@ -38,7 +108,6 @@ class AdvancedResumeScorer:
             score = matches / len(keywords) if keywords else 0
             domain_scores[domain_key] = score
         
-        # Sort by score descending
         sorted_domains = sorted(domain_scores.items(), key=lambda x: x[1], reverse=True)
         return sorted_domains
     
@@ -57,35 +126,53 @@ class AdvancedResumeScorer:
     
     def calculate_domain_score(self, jd_text, resume_text, primary_domain):
         """
-        Calculate domain-specific matching score
+        Calculate domain-specific matching score using ML predicted category profile similarity
         """
+        if not self.classifier:
+            return self._calculate_domain_score_fallback(jd_text, resume_text, primary_domain)
+            
+        try:
+            # Vector of probabilities across 24 fields
+            jd_probs = self.classifier.predict_proba([jd_text])[0]
+            resume_probs = self.classifier.predict_proba([resume_text])[0]
+            
+            # Vector similarity (cosine) represents domain profile match
+            dot_product = np.dot(jd_probs, resume_probs)
+            norm_jd = np.linalg.norm(jd_probs)
+            norm_resume = np.linalg.norm(resume_probs)
+            
+            if norm_jd * norm_resume > 0:
+                sim = dot_product / (norm_jd * norm_resume)
+            else:
+                sim = 0.0
+                
+            return float(sim)
+        except Exception as e:
+            logger.error(f"ML Domain score similarity failed: {e}. Using fallback.")
+            return self._calculate_domain_score_fallback(jd_text, resume_text, primary_domain)
+            
+    def _calculate_domain_score_fallback(self, jd_text, resume_text, primary_domain):
+        """Rule-based fallback for domain score"""
         if primary_domain not in self.domains:
-            return 0.5  # Neutral score
+            return 0.5
         
         domain_info = self.domains[primary_domain]
-        
-        # Extract keywords from both texts
         jd_keywords = set(self.extract_domain_keywords(jd_text, primary_domain))
         resume_keywords = set(self.extract_domain_keywords(resume_text, primary_domain))
         
         if not jd_keywords:
             return 0.5
         
-        # Calculate match percentage
         matched = len(jd_keywords.intersection(resume_keywords))
         total = len(jd_keywords)
-        
         match_score = matched / total
         
-        # Check for required skills
         required_skills = domain_info.get('required_skills', [])
         resume_lower = resume_text.lower()
         required_matches = sum(1 for skill in required_skills if skill in resume_lower)
         required_score = required_matches / len(required_skills) if required_skills else 1.0
         
-        # Combine scores
         domain_score = (match_score * 0.7) + (required_score * 0.3)
-        
         return domain_score
     
     def extract_education_level(self, text):
@@ -218,9 +305,9 @@ class AdvancedResumeScorer:
             logger.error(f"TF-IDF calculation failed: {e}")
             return [0.0] * len(resume_texts)
     
-    def calculate_keyword_score(self, jd_keywords, resume_keywords):
+    def calculate_keyword_score(self, jd_keywords, resume_keywords, resume_text=""):
         """
-        Enhanced keyword matching with weighted scoring
+        Enhanced keyword matching with weighted scoring and Word2Vec synonym matching.
         """
         if not jd_keywords:
             return 0.0
@@ -229,12 +316,34 @@ class AdvancedResumeScorer:
         resume_set = set(resume_keywords)
         
         # Exact matches
-        intersection = jd_set.intersection(resume_set)
-        matched_count = len(intersection)
+        exact_matches = jd_set.intersection(resume_set)
+        matched_count = len(exact_matches)
+        
+        # Check synonyms for unmatched JD keywords
+        unmatched_jd = jd_set - resume_set
+        synonym_matches = 0.0
+        
+        # Pre-tokenize the resume text to search for synonyms
+        resume_words = set(re.findall(r'\w+', resume_text.lower())) if resume_text else set()
+        
+        if self.w2v_model and unmatched_jd and resume_words:
+            for kw in unmatched_jd:
+                try:
+                    if kw in self.w2v_model.wv:
+                        syns = self.w2v_model.wv.most_similar(kw, topn=5)
+                        for syn_word, similarity in syns:
+                            # If a high-similarity synonym (> 0.65) exists in the resume
+                            if similarity >= 0.65 and syn_word in resume_words:
+                                synonym_matches += similarity
+                                break
+                except:
+                    pass
+                    
+        total_matched = matched_count + synonym_matches
         total_count = len(jd_set)
         
-        # Coverage score (what % of JD keywords are in resume)
-        coverage = matched_count / total_count if total_count > 0 else 0
+        # Coverage score (including synonym matches)
+        coverage = min(total_matched / total_count, 1.0) if total_count > 0 else 0
         
         # Precision score (what % of resume keywords are relevant)
         precision = matched_count / len(resume_set) if len(resume_set) > 0 else 0
@@ -247,8 +356,7 @@ class AdvancedResumeScorer:
         
         # Weighted combination favoring coverage
         keyword_score = (coverage * 0.7) + (f1_score * 0.3)
-        
-        return keyword_score
+        return float(keyword_score)
     
     def calculate_semantic_similarity(self, jd_text, resume_text, nlp=None):
         """
@@ -279,6 +387,7 @@ class AdvancedResumeScorer:
                 return intersection / union if union > 0 else 0.0
         except Exception as e:
             logger.warning(f"Semantic similarity failed: {e}")
+            return 0.0
     def calculate_role_match(self, job_title, resume_text):
         """
         Calculate how well the resume matches the job title.

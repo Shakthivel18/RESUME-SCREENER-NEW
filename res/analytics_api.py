@@ -46,7 +46,7 @@ def get_dashboard_stats():
                     domain = data.get('domain', 'Unknown')
                     domain_counts[domain] = domain_counts.get(domain, 0) + 1
                     
-            except:
+            except Exception:
                 continue
                 
         avg_score = sum(scores) / len(scores) if scores else 0

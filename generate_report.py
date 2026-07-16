@@ -12,14 +12,15 @@ from docx.oxml import OxmlElement
 import os
 
 # ─── Image paths ──────────────────────────────────────────────────────────────
-ARTIFACT_DIR = r"C:\Users\shakt\.gemini\antigravity\brain\63b02979-e9d0-4a91-bf3a-cfa308ec0678"
+_project_root = os.path.dirname(os.path.abspath(__file__))
+_assets_dir = os.path.join(_project_root, "assets")
 
-IMG_ARCHITECTURE = os.path.join(ARTIFACT_DIR, "system_architecture_diagram_1775492317091.png")
-IMG_WORKFLOW      = os.path.join(ARTIFACT_DIR, "workflow_flowchart_1775492330414.png")
-IMG_SCORING       = os.path.join(ARTIFACT_DIR, "scoring_methodology_diagram_1775492346245.png")
-IMG_RESULTS       = r"C:\Users\shakt\.gemini\antigravity\brain\6a957a28-15d8-466d-9226-ff30c1558513\minimal_color_results_1775663637604.png"
-IMG_DFD           = os.path.join(ARTIFACT_DIR, "data_flow_diagram_1775492400308.png")
-IMG_PERF          = r"C:\Users\shakt\.gemini\antigravity\brain\6a957a28-15d8-466d-9226-ff30c1558513\minimal_color_perf_1775663601381.png"
+IMG_ARCHITECTURE = os.path.join(_assets_dir, "system_architecture_diagram_1775492317091.png")
+IMG_WORKFLOW      = os.path.join(_assets_dir, "workflow_flowchart_1775492330414.png")
+IMG_SCORING       = os.path.join(_assets_dir, "scoring_methodology_diagram_1775492346245.png")
+IMG_RESULTS       = os.path.join(_assets_dir, "minimal_results_chart.png")
+IMG_DFD           = os.path.join(_assets_dir, "data_flow_diagram_1775492400308.png")
+IMG_PERF          = os.path.join(_assets_dir, "minimal_performance_chart.png")
 
 # ─── Colour Palette ───────────────────────────────────────────────────────────
 NAVY       = RGBColor(0x0D, 0x1B, 0x2A)

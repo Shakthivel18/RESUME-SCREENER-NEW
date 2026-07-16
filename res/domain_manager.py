@@ -13,13 +13,16 @@ domain_bp = Blueprint('domains', __name__)
 
 DOMAINS_FILE = 'custom_domains.json'
 
+# Backup original built-in domains to allow clean deletion reload
+_BUILTIN_DOMAINS = config.DOMAINS.copy()
+
 def load_custom_domains():
     """Load custom domains from JSON file"""
     if os.path.exists(DOMAINS_FILE):
         try:
             with open(DOMAINS_FILE, 'r') as f:
                 return json.load(f)
-        except:
+        except Exception:
             return {}
     return {}
 
@@ -204,6 +207,10 @@ def delete_domain(domain_id):
 def reload_domains():
     """Reload domains in config module"""
     try:
+        # Reset config.DOMAINS to built-ins first to clear deleted custom domains
+        config.DOMAINS.clear()
+        config.DOMAINS.update(_BUILTIN_DOMAINS)
+        
         # Merge custom domains into config.DOMAINS
         custom_domains = load_custom_domains()
         
@@ -215,7 +222,7 @@ def reload_domains():
         try:
             import advanced_scorer
             importlib.reload(advanced_scorer)
-        except:
+        except Exception:
             pass
             
     except Exception as e:

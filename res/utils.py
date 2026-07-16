@@ -1,5 +1,7 @@
 import os
 import re
+import gzip
+import json
 from collections import Counter
 import fitz  # PyMuPDF
 import docx
@@ -66,7 +68,7 @@ except OSError:
     logger.warning("Spacy model 'en_core_web_sm' not found. Using simple fallback preprocessing.")
     nlp = None
 
-def preprocess_text(text):
+def preprocess_text(text: str) -> str:
     """
     Cleans and tokenizes text. Uses Spacy if available, otherwise simple lowercase/split.
     """
@@ -82,11 +84,123 @@ def preprocess_text(text):
         return " ".join(tokens)
     else:
         # Fallback: simple lowercase and removal of non-alphanumeric (basic)
-        import re
         text = text.lower()
         # Keep only letters and spaces
         text = re.sub(r'[^a-z\s]', '', text)
         return text
+
+# --- 2.5. NLP Segmentation & Compression Utilities ---
+
+def segment_resume_sections(text: str) -> dict:
+    """
+    Segment resume text into logical sections using NLP-style regex boundaries.
+    """
+    sections = {
+        "skills": "",
+        "experience": "",
+        "education": "",
+        "projects": "",
+        "certifications": "",
+        "general": ""
+    }
+    
+    headers = {
+        "skills": [r'skills?', r'technical\s+skills?', r'core\s+competencies', r'technologies', r'key\s+skills?', r'expertise', r'areas\s+of\s+expertise', r'skills?\s*\&\s*technologies'],
+        "experience": [r'experience', r'work\s+experience', r'professional\s+experience', r'employment\s+history', r'work\s+history', r'career\s+history', r'employment'],
+        "education": [r'education', r'academic\s+background', r'academic\s+history', r'credentials', r'qualifications', r'academic\s+qualifications'],
+        "projects": [r'projects', r'academic\s+projects', r'personal\s+projects', r'key\s+projects', r'selected\s+projects'],
+        "certifications": [r'certifications?', r'courses?', r'licenses?', r'accreditations?', r'awards?']
+    }
+    
+    lines = text.split('\n')
+    current_section = "general"
+    
+    for line in lines:
+        clean_line = line.strip().lower()
+        if not clean_line:
+            continue
+        
+        # Check if line looks like a header (short: <= 4 words)
+        is_header = False
+        words = clean_line.split()
+        if len(words) <= 4:
+            for sec_name, patterns in headers.items():
+                for pattern in patterns:
+                    if re.match(r'^' + pattern + r'\s*[\:\-\=\_]*$', clean_line):
+                        current_section = sec_name
+                        is_header = True
+                        break
+                if is_header:
+                    break
+        
+        if not is_header:
+            sections[current_section] += line + "\n"
+            
+    # Clean up empty lines
+    for sec in sections:
+        sections[sec] = sections[sec].strip()
+        
+    return sections
+
+def save_compressed_candidate_data(candidate_id: str, data: dict) -> bool:
+    """
+    Compresses and saves candidate extracted data into a .json.gz file.
+    """
+    try:
+        folder = 'uploads/processed_text'
+        os.makedirs(folder, exist_ok=True)
+        filepath = os.path.join(folder, f"{candidate_id}.json.gz")
+        
+        json_data = json.dumps(data, ensure_ascii=False)
+        compressed_data = gzip.compress(json_data.encode('utf-8'))
+        
+        with open(filepath, 'wb') as f:
+            f.write(compressed_data)
+        logger.info(f"Compressed and stored candidate data for {candidate_id} to {filepath}")
+        return True
+    except Exception as e:
+        logger.error(f"Failed to compress and store candidate data for {candidate_id}: {e}")
+        return False
+
+def load_compressed_candidate_data(candidate_id: str) -> dict:
+    """
+    Loads and decompresses candidate data from a .json.gz file.
+    Falls back to raw .txt files if .json.gz is not yet generated.
+    """
+    try:
+        folder = 'uploads/processed_text'
+        filepath = os.path.join(folder, f"{candidate_id}.json.gz")
+        
+        if not os.path.exists(filepath):
+            # Fallback to check if uncompressed text exists
+            txt_filepath = os.path.join(folder, f"{candidate_id}.txt")
+            if os.path.exists(txt_filepath):
+                with open(txt_filepath, 'r', encoding='utf-8', errors='ignore') as f:
+                    raw_text = f.read()
+                
+                # Extract components dynamically
+                sections = segment_resume_sections(raw_text)
+                keywords = extract_keywords(raw_text)
+                
+                data = {
+                    "raw_text": raw_text,
+                    "sections": sections,
+                    "keywords": keywords,
+                    "highlights": []
+                }
+                # Pre-compress and save so next lookup is fast
+                save_compressed_candidate_data(candidate_id, data)
+                return data
+            return None
+            
+        with open(filepath, 'rb') as f:
+            compressed_data = f.read()
+            
+        json_data = gzip.decompress(compressed_data).decode('utf-8')
+        return json.loads(json_data)
+    except Exception as e:
+        logger.error(f"Failed to read/decompress candidate data for {candidate_id}: {e}")
+        return None
 
 # --- 3. Advanced Matching Logic with Domain Classification ---
 
@@ -299,7 +413,7 @@ def _calculate_advanced_scores(job_description, resume_data_list, job_title=None
         # Calculate component scores
         component_scores = {
             'tfidf': tfidf_scores[i],
-            'keyword': scorer.calculate_keyword_score(jd_keywords, resume_keywords),
+            'keyword': scorer.calculate_keyword_score(jd_keywords, resume_keywords, resume_text),
             'semantic': scorer.calculate_semantic_similarity(job_description, resume_text, nlp),
             'experience': scorer.calculate_experience_score(jd_years, resume_years),
             'domain': scorer.calculate_domain_score(job_description, resume_text, primary_domain),
@@ -461,12 +575,11 @@ def _calculate_basic_hybrid_scores(job_description, resume_data_list, job_title=
 # --- 4. LLM Summarization (Optional) ---
 # NOTE: This is currently for Summarization, NOT format parsing.
 
-def calculate_answer_similarity(question, answer):
+def calculate_answer_similarity(question: str, answer: str) -> float:
     """
     Calculates semantic similarity between question and answer to score relevance.
     Used for AI Interviewer fallback scoring.
     """
-    import re
     if not question or not answer:
         return 0.0
     

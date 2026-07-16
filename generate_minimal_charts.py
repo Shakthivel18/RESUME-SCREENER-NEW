@@ -68,7 +68,8 @@ def generate_results_chart(output_path):
     plt.close('all')
 
 if __name__ == "__main__":
-    out_dir = r"d:\updated res\assets"
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    out_dir = os.path.join(current_dir, "assets")
     os.makedirs(out_dir, exist_ok=True)
     
     perf_path = os.path.join(out_dir, "minimal_performance_chart.png")

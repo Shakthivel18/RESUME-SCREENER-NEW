@@ -9,6 +9,7 @@ import json
 import time
 from datetime import datetime
 import traceback
+from typing import Any, Dict, List, Optional, Union
 
 # Configuration
 GEMINI_API_KEY = os.getenv('GEMINI_API_KEY', 'AIzaSyBb4pn90oA-YfwG_vpr_kMVH22ulqhgMMg')
@@ -18,7 +19,7 @@ MODELS_TO_TRY = ['gemini-flash-latest', 'gemini-1.5-flash', 'gemini-pro']
 MAX_RETRIES = 2
 RETRY_DELAY = 1  # seconds
 
-def get_model():
+def get_model() -> Optional[bool]:
     """Attempt to configure and return a working Gemini model"""
     if not GEMINI_API_KEY:
         print("WARNING: AI Interviewer - No API Key found.")
@@ -33,7 +34,7 @@ def get_model():
         print(f"ERROR: AI Interviewer - Configuration failed: {e}")
         return None
 
-def generate_with_retry(prompt, model_name='gemini-flash-latest'):
+def generate_with_retry(prompt: str, model_name: str = 'gemini-flash-latest') -> str:
     """Generate content with retry logic and model fallback"""
     
     # Try the requested model first, then others
@@ -53,7 +54,7 @@ def generate_with_retry(prompt, model_name='gemini-flash-latest'):
             
     raise Exception("All AI models failed")
 
-def validate_json_structure(data, default_structure):
+def validate_json_structure(data: Any, default_structure: Any) -> Any:
     """
     Recursively ensure data matches default_structure keys/types.
     """

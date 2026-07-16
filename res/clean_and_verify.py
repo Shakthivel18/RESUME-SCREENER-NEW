@@ -2,7 +2,7 @@ import os
 import glob
 from collections import Counter
 
-PROCESSED_FOLDER = r'e:/RESUME/uploads/processed_text'
+PROCESSED_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads', 'processed_text')
 
 def clean_and_verify():
     # 1. Delete HR files (Old data)
