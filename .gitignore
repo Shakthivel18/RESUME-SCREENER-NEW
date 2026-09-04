@@ -1,0 +1,73 @@
+# ============================================================
+# SECURITY: SSH Keys - NEVER commit private keys
+# ============================================================
+mykey
+mykey.pub
+*.pem
+*.key
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+*.ppk
+
+# ============================================================
+# SECURITY: Environment / secrets files
+# ============================================================
+.env
+.env.*
+!.env.example
+secrets.json
+secrets.yaml
+secrets.yml
+*_secret*
+*_private*
+
+# ============================================================
+# Python
+# ============================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# ============================================================
+# OS / editor artifacts
+# ============================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================
+# Logs & runtime files
+# ============================================================
+error_log.txt
+*.log
+logs/
+data/interviews/
+
+# ============================================================
+# Distribution / uploads (resume files, etc.)
+# ============================================================
+data/uploads/
